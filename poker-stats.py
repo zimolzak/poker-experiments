@@ -1,37 +1,9 @@
 from deuces import Card, Evaluator, Deck
+
 evaluator = Evaluator()
 
-def pr(x):
-    Card.print_pretty_cards(x)
-
-board = [
-    Card.new('Ah'),
-    Card.new('Kd'),
-    Card.new('Jc')
-]
-hand = [
-    Card.new('Qs'),
-    Card.new('Th')
-]
-
-deck = Deck()
-b = deck.draw(5)
-p1 = deck.draw(2)
-p2 = deck.draw(2)
-
-def who_wins(b, p1, p2):
-    [pr(h) for h in [b, p1, p2]]
-    s = [evaluator.evaluate(b, p) for p in [p1, p2]]
-    r = [evaluator.class_to_string(evaluator.get_rank_class(x)) for x in s]
-    if s[1] > s[0]:
-        t = "P1 wins"
-    elif s[1] < s[0]:
-        t = "P2 wins"
-    else:
-        t = "push"
-    print ', '.join(map(str, s) + map(str, r) + [t])
-
-who_wins(b, p1, p2)
-
-hands = [p1, p2]
-evaluator.hand_summary(b, hands)
+for i in range(10):
+    deck = Deck()
+    b = deck.draw(3)
+    p = deck.draw(2)
+    print evaluator.evaluate(b, p)
