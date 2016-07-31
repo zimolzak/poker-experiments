@@ -1,0 +1,2 @@
+: |> python poker-stats.py > hand_ranks.txt |> hand_ranks.txt
+: hand_ranks.txt |> Rscript makeplot.R > percentages.txt |> percentages.txt Rplots.pdf
