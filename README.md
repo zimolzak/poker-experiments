@@ -33,4 +33,4 @@ Example
     Nuts: Four of a kind.
 
 
-![Example R plot](https://dl.dropboxusercontent.com/u/38640281/github_img/poker-rpolt.png)
+![Example R plot](https://dl.dropboxusercontent.com/u/38640281/github_img/poker-rplot.png)
