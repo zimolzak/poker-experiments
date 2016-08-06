@@ -1,4 +1,4 @@
-from deuces import Card, Evaluator, Deck
+from deuces.deuces import Card, Evaluator, Deck
 
 evaluator = Evaluator()
 
