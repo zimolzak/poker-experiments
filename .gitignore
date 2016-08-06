@@ -3,3 +3,4 @@
 *.txt
 .tup/*
 *.pyc
+*.csv
