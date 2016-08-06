@@ -34,3 +34,8 @@ Example
 
 
 ![Example R plot](https://dl.dropboxusercontent.com/u/38640281/github_img/poker-rplot.png)
+
+          Flush  Four of a Kind      Full House       High Card            Pair 
+          0.202           0.031           0.138          50.037          42.176 
+       Straight  Straight Flush Three of a Kind        Two Pair 
+          0.411           0.002           2.128           4.875 
