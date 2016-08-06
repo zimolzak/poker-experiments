@@ -18,3 +18,19 @@ Depends on
 * ggplot2
 * tup
 * deuces
+
+Example
+--------
+
+      [ Q ♣ ] , [ A ❤ ] , [ 4 ❤ ]  
+    Think hard... 
+    Nuts: Three of a kind.
+      [ Q ♣ ] , [ A ❤ ] , [ 4 ❤ ] , [ Q ♦ ]  
+    Think hard... 
+    Nuts: Four of a kind.
+      [ Q ♣ ] , [ A ❤ ] , [ 4 ❤ ] , [ Q ♦ ] , [ K ♣ ]  
+    Think hard... 
+    Nuts: Four of a kind.
+
+
+![Example R plot](https://dl.dropboxusercontent.com/u/38640281/github_img/poker-rpolt.png)
