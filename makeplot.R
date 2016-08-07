@@ -1,9 +1,9 @@
 library(ggplot2)
-X = read.delim('~/Desktop/local/poker-stats/hand_ranks.txt', header=FALSE)
+X = read.delim('~/Desktop/local/poker-experiments/hand_ranks.txt', header=FALSE)
 qplot(x=V1, fill=V2, data=X) + labs(x = "Hand rank", fill = "Hand type")
 table(X$V2) / length(X$V2) * 100
 
-Y = read.csv('~/Desktop/local/poker-stats/progression.csv')
+Y = read.csv('~/Desktop/local/poker-experiments/progression.csv')
 t1 = table(Y$flop, Y$river)
 t2 = t1
 for (i in 1:dim(t1)[1]){
