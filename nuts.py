@@ -61,14 +61,14 @@ def trips_is_nuts(hand):
 
 def nut_hand(hand):
     if poss_straight(suited3(hand)):
-        return 'Straight Flush'
+        return '1 Straight Flush'
     elif trips_or_pair(hand):
-        return 'Four of a Kind'
+        return '2 Four of a Kind'
     elif flush_is_nuts(hand):
-        return 'Flush'
+        return '4 Flush'
     elif straight_is_nuts(hand):
-        return 'Straight'
+        return '5 Straight'
     elif trips_is_nuts(hand):
-        return 'Three of a Kind'
+        return '6 Three of a Kind'
     else:
         return 'Something else?'

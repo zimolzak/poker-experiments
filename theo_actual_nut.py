@@ -39,5 +39,5 @@ for num_players in range(2,7):
             player = deck.draw(4)
             realrank = omaha_eval(player, flop)
             rank_clasess.append(r2c(realrank))
-
-        print nut_hand(flop) + "," + evaluator.class_to_string(min(rank_clasess)) + "," + str(num_players)
+        winner = min(rank_clasess)
+        print nut_hand(flop) + "," + str(winner) + ' ' + evaluator.class_to_string(winner) + "," + str(num_players)
