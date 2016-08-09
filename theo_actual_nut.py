@@ -31,7 +31,7 @@ def list_to_pretty_str(card_ints):
 print "nut_hand,flop_leader,num_players"
 
 for num_players in range(2,7):
-    for i in range(1000):
+    for i in range(5000):
         deck = Deck()
         flop = deck.draw(3)
         rank_clasess= []
