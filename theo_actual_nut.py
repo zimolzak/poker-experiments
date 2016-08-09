@@ -17,6 +17,9 @@ def omaha_eval(hole, board):
 def r2t(x):
     return evaluator.class_to_string(evaluator.get_rank_class(x))
 
+def r2c(x):
+    return evaluator.get_rank_class(x)
+
 def list_to_pretty_str(card_ints):
     output = " "
     for i in range(len(card_ints)):
@@ -27,10 +30,14 @@ def list_to_pretty_str(card_ints):
             output += Card.int_to_pretty_str(c) + " "
     return output
 
-print list_to_pretty_str(flop), "nuts =   ", nut_hand(flop)
+print list_to_pretty_str(flop)
 
+rank_clasess= []
 for i in range(6):
     player = deck.draw(4)
     realrank = omaha_eval(player, flop)
-    realtext = r2t(realrank)
-    print list_to_pretty_str(player), realtext
+    print list_to_pretty_str(player), r2t(realrank)
+    rank_clasess.append(r2c(realrank))
+
+print
+print "nuts = ", nut_hand(flop), ". win = ", evaluator.class_to_string(min(rank_clasess))
