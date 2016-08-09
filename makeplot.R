@@ -1,4 +1,6 @@
 library(ggplot2)
+options(width = 190)
+
 X = read.delim('~/Desktop/local/poker-experiments/hand_ranks.txt', header=FALSE)
 qplot(x=V1, fill=V2, data=X) + labs(x = "Hand rank", fill = "Hand type")
 table(X$V2) / length(X$V2) * 100
@@ -20,7 +22,8 @@ cat('\n')
 
 Z = read.csv('~/Desktop/local/poker-experiments/freq_of_nut.csv')
 for (n in 2:max(Z$num_players)){
+    d = Z[Z$num_players == n, ]
     print(n)
-    print(rowpct(table(Z$nut_hand, Z$flop_leader)))
+    print(rowpct(table(d$nut_hand, d$flop_leader)))
     cat('\n')
 }
