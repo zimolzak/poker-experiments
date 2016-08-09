@@ -14,3 +14,9 @@ for (i in 1:dim(t1)[1]){
 
 print(t1)
 print(t2)
+
+Z = read.csv('~/Desktop/local/poker-experiments/freq_of_nut.csv')
+for (n in 2:max(Z$num_players)){
+    print(n)
+    print(table(Z$nut_hand, Z$flop_leader))
+}

@@ -3,8 +3,6 @@ from deuces.deuces import Card, Evaluator, Deck
 from nuts import nut_hand
 
 evaluator = Evaluator()
-deck = Deck()
-flop = deck.draw(3)
 
 def omaha_eval(hole, board):
     assert(len(hole)) == 4
@@ -30,14 +28,16 @@ def list_to_pretty_str(card_ints):
             output += Card.int_to_pretty_str(c) + " "
     return output
 
-print list_to_pretty_str(flop)
+print "nut_hand,flop_leader,num_players"
 
-rank_clasess= []
-for i in range(6):
-    player = deck.draw(4)
-    realrank = omaha_eval(player, flop)
-    print list_to_pretty_str(player), r2t(realrank)
-    rank_clasess.append(r2c(realrank))
+for num_players in range(2,7):
+    for i in range(1000):
+        deck = Deck()
+        flop = deck.draw(3)
+        rank_clasess= []
+        for p in range(num_players):
+            player = deck.draw(4)
+            realrank = omaha_eval(player, flop)
+            rank_clasess.append(r2c(realrank))
 
-print
-print "nuts = ", nut_hand(flop), ". win = ", evaluator.class_to_string(min(rank_clasess))
+        print nut_hand(flop) + "," + evaluator.class_to_string(min(rank_clasess)) + "," + str(num_players)
