@@ -31,3 +31,6 @@ for (n in 2:max(Z$num_players)){
     print(rowpct(table(d$nut_hand, d$flop_leader)))
     cat('\n')
 }
+
+T = read.csv('~/Desktop/local/poker-experiments/aavjqs.csv')
+qplot(data = T, x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs JQ suited', color='Iteration')
