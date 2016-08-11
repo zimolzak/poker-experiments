@@ -27,18 +27,11 @@ def find_pcts(p1, p2, start_b = [], iter = 10000):
 
 Card.print_pretty_cards(p1)
 Card.print_pretty_cards(p2)
-print find_pcts(p1, p2)
-
 main_deck = Deck()
+board = []
 
-flop = draw_sure(main_deck, 3, p1 + p2)
-pr(flop)
-print find_pcts(p1, p2, start_b = flop)
-
-turn = draw_sure(main_deck, 1, p1+p2+flop)
-pr(turn)
-print find_pcts(p1, p2, start_b = flop+turn)
-
-river = draw_sure(main_deck, 1, p1+p2+flop+turn)
-pr(river)
-print find_pcts(p1, p2, start_b = flop+turn+river)
+for ncards in [0, 3, 1, 1]:
+    add_to_board = draw_sure(main_deck, ncards, p1 + p2 + board)
+    pr(add_to_board)
+    board = board + add_to_board
+    print find_pcts(p1, p2, start_b = board)
