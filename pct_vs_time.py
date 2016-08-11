@@ -9,4 +9,4 @@ p2 = [Card.new('Ad'), Card.new('Kd')]
 for i in range(10):
     deck = Deck()
     b = deck.draw(5)
-    who_wins(b, p1, p2)
+    print who_wins(b, p1, p2, printout = False)
