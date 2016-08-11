@@ -1,4 +1,4 @@
-from deuces.deuces import Card, Evaluator
+from deuces.deuces import Card, Evaluator, Deck
 
 evaluator = Evaluator()
 
@@ -22,3 +22,23 @@ def who_wins(b, p1, p2, printout = True):
     if printout:
         print ', '.join(map(str, s) + map(str, r) + [t])
     return winning_player
+
+def draw_sure(deck, n, exclusions):
+    drawn = []
+    while len(drawn) < n:
+        c = deck.draw()
+        if c in exclusions + drawn:
+            continue
+        drawn.append(c)
+    return drawn
+
+def find_pcts(p1, p2, start_b = [], iter = 10000):
+    win_record = []
+    for i in range(iter):
+        deck = Deck()
+        need = 5 - len(start_b)
+        b2 = draw_sure(deck, need, p1+p2+start_b)
+        win_record.append(who_wins(start_b + b2, p1, p2, printout = False))
+    return [win_record.count(1) / float(len(win_record)), 
+            win_record.count(2) / float(len(win_record))
+    ]
