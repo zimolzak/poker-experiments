@@ -1,3 +1,7 @@
+from deuces.deuces import Card, Evaluator
+
+evaluator = Evaluator()
+
 def pr(x):
     Card.print_pretty_cards(x)
 
