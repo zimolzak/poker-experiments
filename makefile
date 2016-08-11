@@ -1,5 +1,6 @@
 all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv
 	Rscript makeplot.R > percentages.txt
+	perl -pi -e 's/\n/\r\n/g' percentages.txt
 
 hand_ranks.txt :
 	python poker-stats.py > hand_ranks.txt
