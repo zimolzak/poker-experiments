@@ -12,7 +12,12 @@ freq_of_nut.csv :
 	python theo_actual_nut.py > freq_of_nut.csv
 
 aavjqs.csv :
-	python pct_vs_time.py > aavjqs.csv
+	echo 'villain,iter,stage,pct' > aavjqs.csv
+	python pct_vs_time.py >> aavjqs.csv &
+	python pct_vs_time.py >> aavjqs.csv &
+	python pct_vs_time.py >> aavjqs.csv &
+	python pct_vs_time.py >> aavjqs.csv
+	sleep 2
 
 clean :
 	rm -f hand_ranks.txt
