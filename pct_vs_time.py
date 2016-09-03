@@ -5,6 +5,7 @@ from convenience import draw_sure, find_pcts, pr
 ### 20 * 4 times = 3.2 million iters altogether. Takes rather a while.
 ### 5 min on Intel Core i5 at 3.1 GHz (really only uses 1 core
 ### though). In other words, one call of find_pcts() takes about 1 sec.
+### Seems maybe 15 - 20 min on MacBook Pro 2.7 GHz Intel Core i7?
 
 p1 = [Card.new('As'), Card.new('Ac')]
 
@@ -16,7 +17,7 @@ villain = {'jqs' : [Card.new('Js'), Card.new('Qs')] ,
 print 'villain,iter,stage,pct'
 
 for villain_str, p2 in villain.iteritems():
-    for i in range(20):
+    for i in range(5):
         main_deck = Deck()
         board = []
         for j, ncards in enumerate([0, 3, 1, 1]):
@@ -32,7 +33,7 @@ for villain_str, p2 in villain.iteritems():
 p1 = [Card.new('As'), Card.new('Kc')]
 p2 = [Card.new('7h'), Card.new('7d')]
 villain_str = 'AKo v 77'
-for i in range(20):
+for i in range(5):
     main_deck = Deck()
     board = []
     for j, ncards in enumerate([0, 3, 1, 1]):
