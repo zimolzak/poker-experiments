@@ -4,6 +4,7 @@ all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv ringwinners.csv
 
 ringwinners.csv :
 	python ring_game.py > ringwinners.csv
+###
 
 hand_ranks.txt :
 	python poker-stats.py > hand_ranks.txt

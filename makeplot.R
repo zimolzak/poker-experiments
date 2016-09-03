@@ -38,9 +38,14 @@ qplot(data = T[T$villain=='aks',], x=stage, y=pct, color=as.factor(iter)) + geom
 qplot(data = T[T$villain=='kqs',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs KQ suited', color='Iteration')
 qplot(data = T[T$villain=='AKo v 77',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AKo vs 77', color='Iteration')
 
+cat("Winning cards/hand if all 9 players show down\n========\n\n")
+
 options(width = 100)
 
 R = read.csv('~/Desktop/local/poker-experiments/ringwinners.csv')
-tr = table(R$wincards)
-head(sort(tr, decreasing=TRUE), n=100)   ##  / dim(R)[1] * 100
+
+winvec = table(R$cards, R$wl)[,'w']
+lossvec = table(R$cards, R$wl)[,'l']
+round(sort(winvec / (winvec + lossvec) * 100, decreasing=TRUE), digits=2)
+
 sort(table(R$winhand), decreasing=TRUE) / dim(R)[1] * 100
