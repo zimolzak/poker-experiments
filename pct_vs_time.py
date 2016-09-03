@@ -1,5 +1,5 @@
 from deuces.deuces import Card, Deck
-from convenience import draw_sure, find_pcts, pr
+from convenience import draw_sure, find_pcts
 from random import randint
 
 ### find_pcts() does 10,000 iterations by default. And we call it 4 *
