@@ -5,6 +5,16 @@ evaluator = Evaluator()
 def pr(x):
     Card.print_pretty_cards(x)
 
+def ring_winners(b, players):
+    winners = []
+    winrank = ''
+    s = [evaluator.evaluate(b, p) for p in players]
+    for i, rank in enumerate(s):
+        if rank == min(s):
+            winners.append(i)
+            winrank = evaluator.class_to_string(evaluator.get_rank_class(rank))
+    return [winners, winrank]
+
 def who_wins(b, p1, p2, printout = True):
     if printout:
         [pr(h) for h in [b, p1, p2]]

@@ -37,3 +37,10 @@ qplot(data = T[T$villain=='jqs',], x=stage, y=pct, color=as.factor(iter)) + geom
 qplot(data = T[T$villain=='aks',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs AK suited', color='Iteration')
 qplot(data = T[T$villain=='kqs',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs KQ suited', color='Iteration')
 qplot(data = T[T$villain=='AKo v 77',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AKo vs 77', color='Iteration')
+
+options(width = 100)
+
+R = read.csv('~/Desktop/local/poker-experiments/ringwinners.csv')
+tr = table(R$wincards)
+head(sort(tr, decreasing=TRUE), n=100)   ##  / dim(R)[1] * 100
+sort(table(R$winhand), decreasing=TRUE) / dim(R)[1] * 100

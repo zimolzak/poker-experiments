@@ -1,6 +1,9 @@
-all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv
+all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv ringwinners.csv
 	Rscript makeplot.R > percentages.txt
 	perl -pi -e 's/\n/\r\n/g' percentages.txt
+
+ringwinners.csv :
+	python ring_game.py > ringwinners.csv
 
 hand_ranks.txt :
 	python poker-stats.py > hand_ranks.txt
@@ -19,10 +22,15 @@ aavjqs.csv :
 	python pct_vs_time.py >> aavjqs.csv
 	sleep 2
 
-clean :
+clean : cleanhard cleaneasy
+
+cleanhard :
+	rm -f aavjqs.csv
+
+cleaneasy : 
 	rm -f hand_ranks.txt
 	rm -f Rplots.pdf
 	rm -f percentages.txt
 	rm -f progression.csv
 	rm -f freq_of_nut.csv
-	rm -f aavjqs.csv
+	rm -f ringwinners.csv
