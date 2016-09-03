@@ -3,8 +3,17 @@ all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv ringwinners.csv
 	perl -pi -e 's/\n/\r\n/g' percentages.txt
 
 ringwinners.csv :
-	python ring_game.py > ringwinners.csv
-###
+	echo 'cards,winhand,wl,n,i' > headers.csv
+	python ring_game.py > temp1.csv &
+	sleep 0.5
+	python ring_game.py > temp2.csv &
+	sleep 0.5
+	python ring_game.py > temp3.csv &
+	sleep 0.5
+	python ring_game.py > temp4.csv
+	sleep 2
+	cat headers.csv temp*.csv > ringwinners.csv
+	rm -f headers.csv temp*.csv
 
 hand_ranks.txt :
 	python poker-stats.py > hand_ranks.txt

@@ -1,9 +1,7 @@
 from deuces.deuces import Deck, Card
 from convenience import ring_winners
 
-print 'cards,winhand,wl,n,i'
-
-for n in range(25000):
+for n in range(75000):
     deck = Deck()
 
     ## Deal the hole cards
