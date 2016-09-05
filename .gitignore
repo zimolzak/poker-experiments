@@ -5,3 +5,5 @@
 *.pyc
 *.csv
 *.bak
+!ev_vs_position.txt
+!rank_vs_opps.txt
