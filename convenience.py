@@ -2,6 +2,44 @@ from deuces.deuces import Card, Evaluator, Deck
 
 evaluator = Evaluator()
 
+def pto(pct):
+    """Percentage to odds converter. Take a number like 35, return what
+    odds it represents (x-to-one odds).
+    """
+    return (1 - pct / 100.0) / (pct / 100.0)
+
+def reduce(hand):
+    """Reduce a hand like [As, Th] to a string like ATo."""
+    assert(type(hand) == list)
+    assert(len(hand) == 2)
+    assert(type(hand[0]) == type(hand[1]) == int)
+    hand.sort(reverse=True)
+    hand_str = Card.int_to_str(hand[0])[0] + Card.int_to_str(hand[1])[0]
+    if Card.get_suit_int(hand[0]) == Card.get_suit_int(hand[1]):
+        hand_str += 's'
+    else:
+        hand_str += 'o'
+    return hand_str
+
+def strategy(hand, style='tight'):
+    assert style == 'tight'
+         # a   k   q   j   t   9   8   7   6   5   4   3   2
+    Mt = ['1   1   2   2   2   3   3  3.5  4   4   4   4   4', #a
+          '1   1   2   3   3   4   4  4.5  5   5   5   5   5', #k
+          '2   3   1   2  3.5  4  4.5  5   5   5   5   5   5', #qa
+          '2   3   4   2  3.5  4  4.5  5   5   5   5   5   5', #j
+          '3   4   4   4   2   4  4.5  5   5   5   5   5   5', #t
+          '3   4  4.5  5  4.5  2   4  4.5  5   5   5   5   5', #9
+          '3   5   5   5   5  4.5  3   4  4.5  5   5   5   5', #8
+          '4   5   5   5   5   5   5   3  4.5 4.5  5   5   5', #7
+          '4   5   5   5   5   5   5   5   3  4.5  5   5   5', #6
+          '4   5   5   5   5   5   5   5   5  3.5 4.5  5   5', #5
+          '4.5 5   5   5   5   5   5   5   5   5   ', #4
+          '4.5 5   ', #3
+          '4.5 5   ', #2
+]
+    return Mt
+
 def pr(x):
     Card.print_pretty_cards(x)
 
