@@ -1,6 +1,8 @@
 from deuces.deuces import Deck, Card
 from convenience import ring_winners
 
+### Takes about 38 sec on Intel Core i5 at 3.1 GHz. 
+
 for n in range(75000):
     deck = Deck()
 

@@ -23,6 +23,11 @@ def reduce(hand):
     return hand_str
 
 def playing(hand, position, style):
+    """Should we play a given hand in a given situation? The hand argument
+    can be either a list of 'deuces' cards (integers), or a string
+    like 'JTo', 'JTs', 'JT', where the latter is assumed to be
+    off-suit.
+    """
     play_pct = {
         'average': {'early': 4.1, 'middle': 10.7, 'late': 20.4, 'button': 35.8},
         'tight': {'early': 3.0, 'middle': 8.9, 'late': 17.2, 'button': 34.3},
@@ -30,7 +35,10 @@ def playing(hand, position, style):
         'short': {'early': 4.7, 'middle': 13.0, 'late': 23.7, 'button': 42.0}
     }
     my_pct = play_pct[style][position]
-    my_str = reduce(hand).replace('o','')
+    if type(hand) == list:
+        my_str = reduce(hand).replace('o','')
+    elif type(hand) == str:
+        my_str = hand.replace('o','')
     return my_str in top_hands_pct(my_pct)
 
 def range_plot(hands):
@@ -64,7 +72,9 @@ def add_margins(M_str):
     return '\n'.join(lines)
 
 def top_hands_pct(p):
-    """Return list of the top p percent of hands."""
+    """Return list of the top p percent of hands, using the lookup table
+    called 'HR' (short for Hand Rankings).
+    """
     n_hands = int(round(len(HR) * (p / 100.0)))
     hand_list = map(lambda x: x['h'], HR[0:n_hands])
     return hand_list
@@ -89,8 +99,7 @@ def strategy(hand, style='tight'):
           ]
     return Mt
 
-###
-
+# Source for hole card rank table -
 # http://www.tightpoker.com/poker_hands.html
 
 HR = [
@@ -151,8 +160,6 @@ HR = [
 {'h':'K5s', 'e':-0.05, 'n':349320},
 {'h':'K4s', 'e':-0.05, 'n':348681},
 {'h':'T7s', 'e':-0.05, 'n':347638},
-
-
 {'h':'Q7s', 'e':-0.06, 'n':348073},
 {'h':'K9', 'e':-0.07, 'n':1045630},
 {'h':'65s', 'e':-0.07, 'n':348590},
@@ -210,7 +217,6 @@ HR = [
 {'h':'65', 'e':-0.12, 'n':1045971},
 {'h':'Q2s', 'e':-0.12, 'n':348912},
 {'h':'94', 'e':-0.12, 'n':1047422},
-
 {'h':'74', 'e':-0.12, 'n':1043278},
 {'h':'54', 'e':-0.12, 'n':1046435},
 {'h':'A4', 'e':-0.12, 'n':1046931},
@@ -266,12 +272,7 @@ HR = [
 {'h':'94s', 'e':-0.15, 'n':348259},
 {'h':'72s', 'e':-0.15, 'n':348368},
 {'h':'32s', 'e':-0.15, 'n':349794},
-
 ]
-
-
-
-###
 
 def pr(x):
     Card.print_pretty_cards(x)

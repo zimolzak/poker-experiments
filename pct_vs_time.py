@@ -7,6 +7,9 @@ from random import randint
 ### 5 min on Intel Core i5 at 3.1 GHz (really only uses 1 core
 ### though). In other words, one call of find_pcts() takes about 1 sec.
 ### Seems maybe 15 - 20 min on MacBook Pro 2.7 GHz Intel Core i7?
+###
+### Now with 4 processes, 1:30 on Core i5 3.1 GHz. 8 million iters.
+### Implies about 8900 per sec.
 
 myid = randint(1,999) * 100
             
