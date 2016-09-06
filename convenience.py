@@ -1,4 +1,5 @@
 from deuces.deuces import Card, Evaluator, Deck
+import numpy
 
 evaluator = Evaluator()
 
@@ -20,6 +21,42 @@ def reduce(hand):
     else:
         hand_str += 'o'
     return hand_str
+
+def range_plot(hands):
+    """Take a list of strings describing hands. Return 13 lines of dots
+    and stars representing the hands on a grid.
+    """
+    M = numpy.array([[0]*13]*13)
+    ranks = 'AKQJT98765432'
+    for h in hands:
+        if 's' in h:
+            row = ranks.find(h[0])
+            col = ranks.find(h[1])
+        else:
+            row = ranks.find(h[1])
+            col = ranks.find(h[0])
+        M[row][col] = 1
+    M_str = "\n".join(map(str, M)).replace('[','').replace(', ','')
+    M_str = M_str.replace(']','').replace('0','.').replace('1','*')
+    return M_str
+
+def add_margins(M_str):
+    """Adds margins showing ranks to a range plot. Useful as the outermost
+    in a series of nested function calls along the lines of:
+    print add_margins(range_plot(top_hands_pct(25)))
+    """
+    lines = M_str.split('\n')
+    ranks = 'AKQJT98765432'
+    for i, row in enumerate(lines):
+        lines[i] = ranks[i] + ' ' + row
+    lines = ['  A K Q J T 9 8 7 6 5 4 3 2'] + lines
+    return '\n'.join(lines)
+
+def top_hands_pct(p):
+    """Return list of the top p percent of hands."""
+    n_hands = int(round(len(HR) * (p / 100.0)))
+    hand_list = map(lambda x: x['h'], HR[0:n_hands])
+    return hand_list
 
 def strategy(hand, style='tight'):
     """http://www.philnolimits.com/uploads/8/1/8/9/8189328/nl_starting_hands.pdf"""
