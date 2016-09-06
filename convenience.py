@@ -22,6 +22,17 @@ def reduce(hand):
         hand_str += 'o'
     return hand_str
 
+def playing(hand, position, style):
+    play_pct = {
+        'average': {'early': 4.1, 'middle': 10.7, 'late': 20.4, 'button': 35.8},
+        'tight': {'early': 3.0, 'middle': 8.9, 'late': 17.2, 'button': 34.3},
+        'loose': {'early': 4.7, 'middle': 12.4, 'late': 24.0, 'button': 43.5},
+        'short': {'early': 4.7, 'middle': 13.0, 'late': 23.7, 'button': 42.0}
+    }
+    my_pct = play_pct[style][position]
+    my_str = reduce(hand).replace('o','')
+    return my_str in top_hands_pct(my_pct)
+
 def range_plot(hands):
     """Take a list of strings describing hands. Return 13 lines of dots
     and stars representing the hands on a grid.
