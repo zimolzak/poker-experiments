@@ -9,7 +9,7 @@ def pto(pct):
     """
     return (1 - pct / 100.0) / (pct / 100.0)
 
-def reduce(hand):
+def reduce_h(hand):
     """Reduce a hand like [As, Th] to a string like ATo."""
     assert(type(hand) == list)
     assert(len(hand) == 2)
@@ -36,7 +36,7 @@ def playing(hand, position, style):
     }
     my_pct = play_pct[style][position]
     if type(hand) == list:
-        my_str = reduce(hand).replace('o','')
+        my_str = reduce_h(hand).replace('o','')
     elif type(hand) == str:
         my_str = hand.replace('o','')
     return my_str in top_hands_pct(my_pct)
@@ -324,3 +324,16 @@ def find_pcts(p1, p2, start_b = [], iter = 10000):
     return [win_record.count(1) / float(len(win_record)), 
             win_record.count(2) / float(len(win_record))
     ]
+
+def find_pcts_multi(P, start_b = [], iter = 10000):
+    wins_per_player = [0] * len(P)
+    all_hole = reduce(lambda x,y: x+y, P)
+    for i in range(iter):
+        deck = Deck()
+        need = 5 - len(start_b)
+        b2 = draw_sure(deck, need, all_hole+start_b)
+        s = [evaluator.evaluate(start_b+b2, h) for h in P]
+        for i, e in enumerate(s):
+            if e == min(s):
+                wins_per_player[i] += 1
+    return [float(x) / sum(wins_per_player) for x in wins_per_player]
