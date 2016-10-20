@@ -17,6 +17,7 @@ if len(sys.argv) > 2:
 ## strings to lists of Card objects
 hole_cards = str2cards(hole_cards_str)
 board = str2cards(board_str)
+assert len(board) <= 5
 
 ## hole card list to player list-of-lists
 assert len(hole_cards) % 2 == 0
@@ -30,5 +31,5 @@ for i in range(n_players):
 
 print "Board",
 pr(board)
-percents = find_pcts_multi(p, board, iter = 10000)
+percents = find_pcts_multi(p, board, iter = 20000)
 print [round(x, 4) for x in percents]
