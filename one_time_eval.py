@@ -5,13 +5,27 @@ from convenience import find_pcts, pr
 import sys
 
 s = sys.argv[1]
-assert len(s) == 8
-cards = [s[0:2], s[2:4], s[4:6], s[6:8]]
-for i, ci in enumerate(cards):
-    cards[i] = ci[0].upper() + ci[1].lower()
+#board_str = []
+#if len(sys.argv) > 2:
+#    board_str = sys.argv[2]
 
-p1 = [Card.new(cards[0]), Card.new(cards[1])]
-p2 = [Card.new(cards[2]), Card.new(cards[3])]
+def str2cards(s):
+    assert len(s) % 2 == 0
+    str_list = []
+    cards = []
+    for cardnum in range(len(s) / 2):
+        str_list.append(s[cardnum * 2 : cardnum * 2 + 2])
+    for i, si in enumerate(str_list):
+        cstring = si[0].upper() + si[1].lower()
+        cards.append(Card.new(cstring))
+    return cards
+
+cards = str2cards(s)
+
+assert len(cards) == 4
+p1 = cards[0:2]
+p2 = cards[2:4]
+
 pr(p1)
 pr(p2)
 print find_pcts(p1, p2, start_b = [], iter = 10000)
