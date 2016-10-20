@@ -3,6 +3,17 @@ import numpy
 
 evaluator = Evaluator()
 
+def str2cards(s):
+    assert len(s) % 2 == 0
+    str_list = []
+    cards = []
+    for cardnum in range(len(s) / 2):
+        str_list.append(s[cardnum * 2 : cardnum * 2 + 2])
+    for i, si in enumerate(str_list):
+        cstring = si[0].upper() + si[1].lower()
+        cards.append(Card.new(cstring))
+    return cards
+
 def pto(pct):
     """Percentage to odds converter. Take a number like 35, return what
     odds it represents (x-to-one odds).
