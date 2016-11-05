@@ -1,5 +1,5 @@
 from deuces.deuces import Evaluator, Deck
-from convenience import pr
+from convenience import pr, draw_sure
 
 e = Evaluator()
 deck = Deck()
@@ -11,14 +11,14 @@ rc = [None] * 2
 board = deck.draw(3)
 pr(board)
 rc[0] = e.get_rank_class(e.evaluate(hole, board))
-print rc[0]
 print e.class_to_string(rc[0])
 
-riv = [deck.draw(1)]
+# start looping here
+newdeck = Deck()
+riv = draw_sure(newdeck, 1, board + hole)
 pr(riv)
 board = board + riv
 rc[1] = e.get_rank_class(e.evaluate(hole, board))
-print rc[1]
 print e.class_to_string(rc[1])
 
 if rc[0] > rc[1]:
