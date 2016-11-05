@@ -8,24 +8,25 @@ pr(hole)
 
 rc = [None] * 2
 
-board = deck.draw(3)
-pr(board)
-rc[0] = e.get_rank_class(e.evaluate(hole, board))
+flop = deck.draw(3)
+pr(flop)
+rc[0] = e.get_rank_class(e.evaluate(hole, flop))
 print e.class_to_string(rc[0])
 
-hits = 0
+n_outs = 0
 maxiter = 52 - 5
+outs = []
 
 for i in range(maxiter):
-    newdeck = Deck()
-    riv = draw_sure(newdeck, 1, board + hole)
-#    pr(riv)
-    board = board + riv
+    riv = deck.draw(1)
+    board = flop + [riv]
     rc[1] = e.get_rank_class(e.evaluate(hole, board))
-#    print e.class_to_string(rc[1])
     if rc[0] > rc[1]:
-        hits = hits + 1
+        n_outs = n_outs + 1
+        outs.append(riv)
 
-print hits / float(maxiter)
-
-### fixme adding all kinds of crap to board. decl new var called flop
+print n_outs, "outs"
+pr(outs)
+proportion = n_outs / float(maxiter)
+print round(proportion, 3)
+print round((1 - proportion) / proportion, 1), "to 1"
