@@ -22,13 +22,23 @@ def deck_without(cards):
 flop = deck.draw(3)
 pr(flop)
 h_rc_flop = e.get_rank_class(e.evaluate(hole, flop))
-print e.class_to_string(h_rc_flop)
+
+dummy = raw_input('Think hard... ')
+print
+print "Starting with", e.class_to_string(h_rc_flop)
 
 ## start simulating turn cards, counting outs
 
 n_outs = 0
-maxiter = 52 - 5
+maxiter = 52 - 5  # runs every turn card remaining in deck
 outs = []
+
+# You have five outs. Five outs to WHAT HANDS? Two outs get you trips,
+# and three outs get you two pair. Setup a dict that lets us answer
+# this question.
+outs_hands = {}
+for i in range(1,10): # rank classes are [1 .. 9]
+    outs_hands[e.class_to_string(i)] = 0
 
 for i in range(maxiter):
     turn = deck.draw(1) # runs every card in deck
@@ -52,9 +62,16 @@ for i in range(maxiter):
     if Pt > Pf:
         n_outs = n_outs + 1
         outs.append(turn)
+        outs_hands[e.class_to_string(h_rc_turn)] += 1
     
-print n_outs, "outs"
+print n_outs, "outs, which are:"
 pr(outs)
+
+for k, v in outs_hands.iteritems():
+    if v == 0:
+        continue
+    print "    {} outs to {}".format(v, k)
+
 proportion = n_outs / float(maxiter)
-print round(proportion, 3)
+print "Proportion:", round(proportion, 3)
 print round((1 - proportion) / proportion, 1), "to 1"
