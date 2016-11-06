@@ -1,5 +1,5 @@
 all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv pct_vs_time.csv best_hole_cards.csv
-	Rscript makeplot.R > output.txt
+	Rscript analyses.R > output.txt
 	perl -pi -e 's/\n/\r\n/g' output.txt
 
 best_hole_cards.csv :
