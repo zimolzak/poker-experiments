@@ -20,7 +20,7 @@ rowpct = function(t1){
     return(t2)
 }
 
-Y = read.csv('~/Desktop/local/poker-experiments/progression.csv')
+Y = read.csv('~/Desktop/local/poker-experiments/evolution_of_nut.csv')
 t1 = table(Y$flop, Y$river)
 cat("Nuts on flop becomes what nut on river?\n========\n")
 cat('n= ')
