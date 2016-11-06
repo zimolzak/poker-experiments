@@ -49,11 +49,7 @@ for i in range(maxiter):
             hero_win_turn = hero_win_turn + 1
     Pf = round(hero_win_flop / hero_denom, 3)
     Pt = round(hero_win_turn / hero_denom, 3)
-    print "Before turn, won {}/{}={}. After, {}/{}={}"\
-        .format(hero_win_flop, hero_denom, Pf,
-                hero_win_turn, hero_denom, Pt)
     if Pt > Pf:
-        pr([turn])
         n_outs = n_outs + 1
         outs.append(turn)
     
@@ -62,17 +58,3 @@ pr(outs)
 proportion = n_outs / float(maxiter)
 print round(proportion, 3)
 print round((1 - proportion) / proportion, 1), "to 1"
-
-## probably exclude any turn card that pairs to the board.
-## would cover: 2pr to board, trips to board, quads to board.
-## because only 4 card board, no chance of flush/str8 to board
-
-# bug = test case
-
-#   [ 6 h ] , [ J s ]
-#   [ 4 c ] , [ J d ] , [ 3 s ]
-# Pair
-# 3 outs
-#   [ 6 s ] , [ 6 d ] , [ 6 c ]
-# 0.064
-# 14.7 to 1
