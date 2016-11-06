@@ -317,6 +317,7 @@ def who_wins(b, p1, p2, printout = True):
     return winning_player
 
 def draw_sure(deck, n, exclusions):
+    # exclusions is a list. please note this func always returns list.
     drawn = []
     while len(drawn) < n:
         c = deck.draw()
