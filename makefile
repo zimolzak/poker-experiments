@@ -1,6 +1,6 @@
 all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv best_hole_cards.csv
-	Rscript makeplot.R > percentages.txt
-	perl -pi -e 's/\n/\r\n/g' percentages.txt
+	Rscript makeplot.R > output.txt
+	perl -pi -e 's/\n/\r\n/g' output.txt
 
 best_hole_cards.csv :
 	echo 'cards,winhand,wl,n,i' > headers.csv
@@ -40,7 +40,7 @@ cleanhard :
 cleaneasy : 
 	rm -f hand_ranks.txt
 	rm -f Rplots.pdf
-	rm -f percentages.txt
+	rm -f output.txt
 	rm -f progression.csv
 	rm -f freq_of_nut.csv
 	rm -f best_hole_cards.csv
@@ -49,7 +49,7 @@ backup :
 	cp aavjqs.csv bak/
 	cp hand_ranks.txt bak/
 	cp Rplots.pdf bak/
-	cp percentages.txt bak/
+	cp output.txt bak/
 	cp progression.csv bak/
 	cp freq_of_nut.csv bak/
 	cp best_hole_cards.csv bak/

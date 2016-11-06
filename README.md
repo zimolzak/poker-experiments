@@ -6,7 +6,7 @@ Just me playing around with `deuces` for Python.
 Usage
 --------
 
-`make` to render (most interstingly) a text file `percentages.txt` of
+`make` to render (most interstingly) a text file `output.txt` of
 multiple tables. Also a PDF of how common are various poker hands, and
 the "flow" of several heads-up situations over the course of several
 streets.
