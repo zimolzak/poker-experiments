@@ -32,18 +32,22 @@ pct_vs_time.csv :
 	python pct_vs_time.py >> pct_vs_time.csv
 	sleep 2
 
-clean : cleaneasy
+clean :
+	rm -f most_common_hands.txt
+	rm -f evolution_of_nut.csv
+	rm -f theo_actual_nut.csv
+	rm -f best_hole_cards.csv
+
+cleanoutputs :
+	rm -f Rplots.pdf
+	rm -f output.txt
 
 cleanhard :
 	rm -f pct_vs_time.csv
 
-cleaneasy : 
-	rm -f most_common_hands.txt
-	rm -f Rplots.pdf
-	rm -f output.txt
-	rm -f evolution_of_nut.csv
-	rm -f theo_actual_nut.csv
-	rm -f best_hole_cards.csv
+cleaneasy : clean cleanoutputs
+
+cleanall : clean cleanoutputs cleanhard
 
 backup :
 	cp pct_vs_time.csv bak/
