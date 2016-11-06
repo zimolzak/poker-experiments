@@ -1,4 +1,4 @@
-all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv aavjqs.csv best_hole_cards.csv
+all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv pct_vs_time.csv best_hole_cards.csv
 	Rscript makeplot.R > output.txt
 	perl -pi -e 's/\n/\r\n/g' output.txt
 
@@ -24,18 +24,18 @@ evolution_of_nut.csv :
 theo_actual_nut.csv :
 	python theo_actual_nut.py > theo_actual_nut.csv
 
-aavjqs.csv :
-	echo 'villain,iter,stage,pct' > aavjqs.csv
-	python pct_vs_time.py >> aavjqs.csv &
-	python pct_vs_time.py >> aavjqs.csv &
-	python pct_vs_time.py >> aavjqs.csv &
-	python pct_vs_time.py >> aavjqs.csv
+pct_vs_time.csv :
+	echo 'villain,iter,stage,pct' > pct_vs_time.csv
+	python pct_vs_time.py >> pct_vs_time.csv &
+	python pct_vs_time.py >> pct_vs_time.csv &
+	python pct_vs_time.py >> pct_vs_time.csv &
+	python pct_vs_time.py >> pct_vs_time.csv
 	sleep 2
 
 clean : cleaneasy
 
 cleanhard :
-	rm -f aavjqs.csv
+	rm -f pct_vs_time.csv
 
 cleaneasy : 
 	rm -f most_common_hands.txt
@@ -46,7 +46,7 @@ cleaneasy :
 	rm -f best_hole_cards.csv
 
 backup :
-	cp aavjqs.csv bak/
+	cp pct_vs_time.csv bak/
 	cp most_common_hands.txt bak/
 	cp Rplots.pdf bak/
 	cp output.txt bak/

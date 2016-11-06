@@ -42,7 +42,7 @@ for (n in 2:max(Z$num_players)){
     cat('\n')
 }
 
-T = read.csv('~/Desktop/local/poker-experiments/aavjqs.csv')
+T = read.csv('~/Desktop/local/poker-experiments/pct_vs_time.csv')
 qplot(data = T[T$villain=='jqs',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs JQ suited', color='Iteration')
 qplot(data = T[T$villain=='aks',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs AK suited', color='Iteration')
 qplot(data = T[T$villain=='kqs',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AA vs KQ suited', color='Iteration')
