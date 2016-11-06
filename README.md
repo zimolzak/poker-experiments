@@ -5,24 +5,18 @@ Just me playing around with `deuces` for Python.
 
 Usage
 --------
-
-`make` to render (most interstingly) a text file `output.txt` of
-multiple tables. Also a PDF of how common are various poker hands, and
-the "flow" of several heads-up situations over the course of several
-streets.
-
-`python omaha.py` to practice rapidly mentally figuring out what is
-the nut hand.
-
-`python one_time_eval.py as8sqdtc`
-
-Index
---------
 * Completely user-facing
-    * omaha.py
-    * one_time_eval.py
-    * outs_odds_quiz.py
-    * outs_loop.sh
+
+    * `make` to render (most interstingly) a text file `output.txt` of
+      multiple tables. Also a PDF of how common are various poker
+      hands, and the "flow" of several heads-up situations over the
+      course of several streets.
+
+    * `python omaha.py` to practice rapidly mentally figuring out what
+      is the nut hand.
+
+    * `python one_time_eval.py as8sqdtc`
+    * `python outs_odds_quiz.py` or `source outs_loop.sh`
 * Usually called by makefile
     * best_hole_cards.py (multi-proc, > best_hole_cards > R > txt). 
       Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
@@ -41,7 +35,7 @@ Depends on
 * ggplot2
 * deuces
 
-Example
+Example of omaha.py
 --------
 
       [ Q ♣ ] , [ A ❤ ] , [ 4 ❤ ]  
@@ -54,6 +48,8 @@ Example
     Think hard... 
     Nuts: Four of a kind.
 
+Example of most_common_hands.py
+--------
 
 ![Example R plot](https://dl.dropboxusercontent.com/u/38640281/github_img/poker-rplot.png)
 
