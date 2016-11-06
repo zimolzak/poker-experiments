@@ -1,4 +1,4 @@
-all : most_common_hands.txt evolution_of_nut.csv freq_of_nut.csv aavjqs.csv best_hole_cards.csv
+all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv aavjqs.csv best_hole_cards.csv
 	Rscript makeplot.R > output.txt
 	perl -pi -e 's/\n/\r\n/g' output.txt
 
@@ -21,8 +21,8 @@ most_common_hands.txt :
 evolution_of_nut.csv :
 	python evolution_of_nut.py > evolution_of_nut.csv
 
-freq_of_nut.csv :
-	python theo_actual_nut.py > freq_of_nut.csv
+theo_actual_nut.csv :
+	python theo_actual_nut.py > theo_actual_nut.csv
 
 aavjqs.csv :
 	echo 'villain,iter,stage,pct' > aavjqs.csv
@@ -42,7 +42,7 @@ cleaneasy :
 	rm -f Rplots.pdf
 	rm -f output.txt
 	rm -f evolution_of_nut.csv
-	rm -f freq_of_nut.csv
+	rm -f theo_actual_nut.csv
 	rm -f best_hole_cards.csv
 
 backup :
@@ -51,5 +51,5 @@ backup :
 	cp Rplots.pdf bak/
 	cp output.txt bak/
 	cp evolution_of_nut.csv bak/
-	cp freq_of_nut.csv bak/
+	cp theo_actual_nut.csv bak/
 	cp best_hole_cards.csv bak/

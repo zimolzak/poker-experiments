@@ -29,7 +29,7 @@ cat('\n')
 print(rowpct(t1))
 cat('\n')
 
-Z = read.csv('~/Desktop/local/poker-experiments/freq_of_nut.csv')
+Z = read.csv('~/Desktop/local/poker-experiments/theo_actual_nut.csv')
 cat("Number of players, by theoretical nut hand, by actual best on flop\n========\n\n")
 cat('n= ')
 cat(dim(Z)[1])

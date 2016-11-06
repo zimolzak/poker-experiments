@@ -29,7 +29,7 @@ Index
 
     * most_common_hands.py (> hand_ranks > R > pdf)
     * evolution_of_nut.py (> evolution_of_nut > R > txt)
-    * theo_actual_nut.py (freq_of_nut > R > txt)
+    * theo_actual_nut.py (theo_actual_nut > R > txt)
     * pct_vs_time.py (multi-proc, > aavjqs > R > pdf). Long compute.
 * Purely library
     * nuts.py
