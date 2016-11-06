@@ -19,18 +19,10 @@ def deck_without(cards):
             returnme.append(c)
     return returnme
 
-rc = [None] * 2
-
 flop = deck.draw(3)
 pr(flop)
-rc[0] = e.get_rank_class(e.evaluate(hole, flop))
-print e.class_to_string(rc[0])
-
-## 
-
-villain_deck = deck_without(flop + hole)
-for villain in combinations(villain_deck, 2):
-    pass
+h_rc_flop = e.get_rank_class(e.evaluate(hole, flop))
+print e.class_to_string(h_rc_flop)
 
 ## start simulating turn cards, counting outs
 
@@ -40,11 +32,31 @@ outs = []
 
 for i in range(maxiter):
     turn = deck.draw(1) # runs every card in deck
-    rc[1] = e.get_rank_class(e.evaluate(hole, flop + [turn]))
-    if rc[0] > rc[1] and not card_pairs_board(turn, flop):
+    h_rc_turn = e.get_rank_class(e.evaluate(hole, flop + [turn]))
+
+    hero_win_flop = 0
+    hero_win_turn = 0
+    hero_denom = 0.0
+    villain_deck = deck_without(flop + hole + [turn])
+    for v_tuple in combinations(villain_deck, 2):
+        villain = list(v_tuple)
+        hero_denom = hero_denom + 1
+        v_rc_flop = e.get_rank_class(e.evaluate(villain, flop))
+        v_rc_turn = e.get_rank_class(e.evaluate(villain, flop + [turn]))
+        if h_rc_flop < v_rc_flop:
+            hero_win_flop = hero_win_flop + 1
+        if h_rc_turn < v_rc_turn:
+            hero_win_turn = hero_win_turn + 1
+    Pf = round(hero_win_flop / hero_denom, 3)
+    Pt = round(hero_win_turn / hero_denom, 3)
+    print "Before turn, won {}/{}={}. After, {}/{}={}"\
+        .format(hero_win_flop, hero_denom, Pf,
+                hero_win_turn, hero_denom, Pt)
+    if Pt > Pf:
+        pr([turn])
         n_outs = n_outs + 1
         outs.append(turn)
-
+    
 print n_outs, "outs"
 pr(outs)
 proportion = n_outs / float(maxiter)
