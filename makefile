@@ -32,7 +32,7 @@ aavjqs.csv :
 	python pct_vs_time.py >> aavjqs.csv
 	sleep 2
 
-clean : cleanhard cleaneasy
+clean : cleaneasy
 
 cleanhard :
 	rm -f aavjqs.csv
@@ -44,3 +44,12 @@ cleaneasy :
 	rm -f progression.csv
 	rm -f freq_of_nut.csv
 	rm -f ringwinners.csv
+
+backup :
+	cp aavjqs.csv bak/
+	cp hand_ranks.txt bak/
+	cp Rplots.pdf bak/
+	cp percentages.txt bak/
+	cp progression.csv bak/
+	cp freq_of_nut.csv bak/
+	cp ringwinners.csv bak/
