@@ -1,5 +1,6 @@
 from deuces.deuces import Evaluator, Deck, Card
 from convenience import pr, draw_sure
+from itertools import combinations
 
 e = Evaluator()
 deck = Deck()
@@ -25,6 +26,14 @@ pr(flop)
 rc[0] = e.get_rank_class(e.evaluate(hole, flop))
 print e.class_to_string(rc[0])
 
+## 
+
+villain_deck = deck_without(flop + hole)
+for villain in combinations(villain_deck, 2):
+    pass
+
+## start simulating turn cards, counting outs
+
 n_outs = 0
 maxiter = 52 - 5
 outs = []
@@ -48,10 +57,10 @@ print round((1 - proportion) / proportion, 1), "to 1"
 
 # bug = test case
 
-#   [ 6 h ] , [ J s ]  
-#   [ 4 c ] , [ J d ] , [ 3 s ]  
+#   [ 6 h ] , [ J s ]
+#   [ 4 c ] , [ J d ] , [ 3 s ]
 # Pair
 # 3 outs
-#   [ 6 s ] , [ 6 d ] , [ 6 c ]  
+#   [ 6 s ] , [ 6 d ] , [ 6 c ]
 # 0.064
 # 14.7 to 1
