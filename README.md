@@ -23,6 +23,7 @@ Index
     * one_time_eval.py
     * test.py
     * outs_odds_quiz.py
+    * outs_loop.sh
 * Usually called by makefile
     * ring_game.py (multi-proc, > ringwinners > R > txt)
     * poker-stats.py (> hand_ranks > R > pdf)
