@@ -24,7 +24,7 @@ Index
     * outs_odds_quiz.py
     * outs_loop.sh
 * Usually called by makefile
-    * ring_game.py (multi-proc, > ringwinners > R > txt). 
+    * best_hole_cards.py (multi-proc, > best_hole_cards > R > txt). 
       Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
 
     * poker-stats.py (> hand_ranks > R > pdf)

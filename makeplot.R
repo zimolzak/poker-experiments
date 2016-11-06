@@ -49,7 +49,7 @@ qplot(data = T[T$villain=='kqs',], x=stage, y=pct, color=as.factor(iter)) + geom
 qplot(data = T[T$villain=='AKo v 77',], x=stage, y=pct, color=as.factor(iter)) + geom_line() + labs(title='AKo vs 77', color='Iteration')
 
 cat("Winning cards/hand if all 9 players show down\n========\n\n")
-R = read.csv('~/Desktop/local/poker-experiments/ringwinners.csv')
+R = read.csv('~/Desktop/local/poker-experiments/best_hole_cards.csv')
 options(width = 100)
 options(scipen=999)
 cat('n= ')
