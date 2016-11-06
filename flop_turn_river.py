@@ -1,6 +1,8 @@
 from deuces.deuces import Card, Deck
 from nuts import nut_hand
 
+### How does the nut hand evolve over several streets?
+
 print "flop,turn,river"
 
 for i in range(10000):

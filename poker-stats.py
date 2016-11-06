@@ -1,5 +1,8 @@
 from deuces.deuces import Card, Evaluator, Deck
 
+### Simulate a bunch of random 5 card groups and find out what are the
+### most common hands that they make.
+
 evaluator = Evaluator()
 
 for i in range(100000):

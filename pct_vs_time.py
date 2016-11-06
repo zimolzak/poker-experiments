@@ -2,6 +2,10 @@ from deuces.deuces import Card, Deck
 from convenience import draw_sure, find_pcts
 from random import randint
 
+### Given some interesting matchups (AA vs {AKs KQs JQs} and AKo vs
+### 77), show the way the win percentages evolve over several possible
+### streets.
+
 ### find_pcts() does 10,000 iterations by default. And we call it 4 *
 ### 20 * 4 times = 3.2 million iters altogether. 4 showdowns (graph) *
 ### 20 hands (lines on each graph) * 4 streets (points on each line).

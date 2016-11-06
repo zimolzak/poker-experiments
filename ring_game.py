@@ -1,6 +1,7 @@
 from deuces.deuces import Deck, Card
 from convenience import ring_winners
 
+### Winning cards/hand if all 9 players show down.
 ### Takes about 38 sec on Intel Core i5 at 3.1 GHz. 
 ### 1 min on my macbook (2.7ghz i7).
 
