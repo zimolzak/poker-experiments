@@ -21,7 +21,6 @@ Index
 * Completely user-facing
     * omaha.py
     * one_time_eval.py
-    * test.py
     * outs_odds_quiz.py
     * outs_loop.sh
 * Usually called by makefile
