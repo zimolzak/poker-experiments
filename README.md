@@ -6,10 +6,10 @@ Just me playing around with `deuces` for Python.
 Usage
 --------
 
-`make` to render a PDF of how common are various poker hands, and the
-"flow" of several heads-up situations over the course of several
-streets; and a text file of several tables, in particular pertinent to
-nut hands.
+`make` to render (most interstingly) a text file `percentages.txt` of
+multiple tables. Also a PDF of how common are various poker hands, and
+the "flow" of several heads-up situations over the course of several
+streets.
 
 `python omaha.py` to practice rapidly mentally figuring out what is
 the nut hand.
@@ -24,11 +24,13 @@ Index
     * outs_odds_quiz.py
     * outs_loop.sh
 * Usually called by makefile
-    * ring_game.py (multi-proc, > ringwinners > R > txt)
+    * ring_game.py (multi-proc, > ringwinners > R > txt). 
+      Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
+
     * poker-stats.py (> hand_ranks > R > pdf)
-    * flop_turn_river.py (> progression > R)
+    * flop_turn_river.py (> progression > R > txt)
     * theo_actual_nut.py (freq_of_nut > R > txt)
-    * pct_vs_time.py (multi-proc, > aavjqs > R > pdf)
+    * pct_vs_time.py (multi-proc, > aavjqs > R > pdf). Long compute.
 * Purely library
     * nuts.py
     * convenience.py

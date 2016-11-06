@@ -18,7 +18,7 @@ def playing(hand, position, style):
         'tight': {'early': 3.0, 'middle': 8.9, 'late': 17.2, 'button': 34.3},
         'loose': {'early': 4.7, 'middle': 12.4, 'late': 24.0, 'button': 43.5},
         'short': {'early': 4.7, 'middle': 13.0, 'late': 23.7, 'button': 42.0}
-    }
+    } # source: inferred from Phil Gordon
     my_pct = play_pct[style][position]
     if type(hand) == list:
         my_str = reduce_h(hand).replace('o','')

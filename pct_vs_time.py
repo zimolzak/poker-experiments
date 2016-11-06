@@ -3,10 +3,12 @@ from convenience import draw_sure, find_pcts
 from random import randint
 
 ### find_pcts() does 10,000 iterations by default. And we call it 4 *
-### 20 * 4 times = 3.2 million iters altogether. Takes rather a while.
-### 5 min on Intel Core i5 at 3.1 GHz (really only uses 1 core
-### though). In other words, one call of find_pcts() takes about 1 sec.
-### Seems maybe 15 - 20 min on MacBook Pro 2.7 GHz Intel Core i7?
+### 20 * 4 times = 3.2 million iters altogether. 4 showdowns (graph) *
+### 20 hands (lines on each graph) * 4 streets (points on each line).
+### Takes rather a while. 5 min on Intel Core i5 at 3.1 GHz (really
+### only uses 1 core though). In other words, one call of find_pcts()
+### takes about 1 sec. Seems maybe 15 - 20 min on MacBook Pro 2.7 GHz
+### Intel Core i7?
 ###
 ### Now with 4 processes, 1:30 on Core i5 3.1 GHz. 8 million iters.
 ### Implies about 8900 per sec.
