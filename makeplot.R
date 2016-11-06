@@ -1,7 +1,7 @@
 library(ggplot2)
 options(width = 190)
 
-X = read.delim('~/Desktop/local/poker-experiments/hand_ranks.txt', header=FALSE)
+X = read.delim('~/Desktop/local/poker-experiments/most_common_hands.txt', header=FALSE)
 qplot(x=V1, fill=V2, data=X) + labs(x = "Hand rank", fill = "Hand type")
 cat("Freq of various hands in 5 random cards\n========\n")
 cat('n= ')

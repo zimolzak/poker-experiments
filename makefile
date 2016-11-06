@@ -1,4 +1,4 @@
-all : hand_ranks.txt progression.csv freq_of_nut.csv aavjqs.csv best_hole_cards.csv
+all : most_common_hands.txt progression.csv freq_of_nut.csv aavjqs.csv best_hole_cards.csv
 	Rscript makeplot.R > output.txt
 	perl -pi -e 's/\n/\r\n/g' output.txt
 
@@ -15,8 +15,8 @@ best_hole_cards.csv :
 	cat headers.csv temp*.csv > best_hole_cards.csv
 	rm -f headers.csv temp*.csv
 
-hand_ranks.txt :
-	python poker-stats.py > hand_ranks.txt
+most_common_hands.txt :
+	python most_common_hands.py > most_common_hands.txt
 
 progression.csv :
 	python flop_turn_river.py > progression.csv
@@ -38,7 +38,7 @@ cleanhard :
 	rm -f aavjqs.csv
 
 cleaneasy : 
-	rm -f hand_ranks.txt
+	rm -f most_common_hands.txt
 	rm -f Rplots.pdf
 	rm -f output.txt
 	rm -f progression.csv
@@ -47,7 +47,7 @@ cleaneasy :
 
 backup :
 	cp aavjqs.csv bak/
-	cp hand_ranks.txt bak/
+	cp most_common_hands.txt bak/
 	cp Rplots.pdf bak/
 	cp output.txt bak/
 	cp progression.csv bak/

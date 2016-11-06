@@ -27,7 +27,7 @@ Index
     * best_hole_cards.py (multi-proc, > best_hole_cards > R > txt). 
       Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
 
-    * poker-stats.py (> hand_ranks > R > pdf)
+    * most_common_hands.py (> hand_ranks > R > pdf)
     * flop_turn_river.py (> progression > R > txt)
     * theo_actual_nut.py (freq_of_nut > R > txt)
     * pct_vs_time.py (multi-proc, > aavjqs > R > pdf). Long compute.
