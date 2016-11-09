@@ -14,9 +14,27 @@ nut hands.
 `python omaha.py` to practice rapidly mentally figuring out what is
 the nut hand.
 
+`python one_time_eval.py as8sqdtc`
+
+Index
+--------
+* Completely user-facing
+    * omaha.py
+    * one_time_eval.py
+    * test.py
+    * outs_odds_quiz.py
+* Usually called by makefile
+    * ring_game.py (multi-proc, > ringwinners > R > txt)
+    * poker-stats.py (> hand_ranks > R > pdf)
+    * flop_turn_river.py (> progression > R)
+    * theo_actual_nut.py (freq_of_nut > R > txt)
+    * pct_vs_time.py (multi-proc, > aavjqs > R > pdf)
+* Purely library
+    * nuts.py
+    * convenience.py
+
 Depends on
 --------
-
 * R
 * ggplot2
 * deuces
