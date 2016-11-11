@@ -47,7 +47,7 @@ def ring_winners(b, players):
             winrank = evaluator.class_to_string(evaluator.get_rank_class(rank))
     return [winners, winrank]
 
-def __who_wins(b, p1, p2, printout = True):
+def _who_wins(b, p1, p2, printout = True):
     if printout:
         [pr(h) for h in [b, p1, p2]]
     s = [evaluator.evaluate(b, p) for p in [p1, p2]]
@@ -87,7 +87,7 @@ def find_pcts(p1, p2, start_b = [], iter = 10000):
         deck = Deck()
         need = 5 - len(start_b)
         b2 = draw_sure(deck, need, p1+p2+start_b)
-        win_record.append(__who_wins(start_b + b2, p1, p2, printout = False))
+        win_record.append(_who_wins(start_b + b2, p1, p2, printout = False))
     return [win_record.count(1) / float(len(win_record)), 
             win_record.count(2) / float(len(win_record))
     ]
