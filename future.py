@@ -69,10 +69,11 @@ def top_hands_pct(p):
     hand_list = []
     for d in HR:
         hs = d['h']
-        hand_list += [hs]
-        hands_retrieved += Table[hs]
-        if hands_retrieved >= n_hands:
-            break
+        old_distance = abs(n_hands - hands_retrieved)
+        new_distance = abs(n_hands - hands_retrieved - Table[hs])
+        if new_distance < old_distance:
+            hand_list += [hs]
+            hands_retrieved += Table[hs]
     return hand_list
 
 def strategy(hand, style='tight'):

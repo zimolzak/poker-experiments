@@ -16,7 +16,10 @@ for h in thp:
     else:
         t['unsuited'] += 1
 
+running_tot = 0
 for k in 'pairs suited unsuited'.split():
     print t[k], k, '*', mul[k], '=', t[k] * mul[k]
+    running_tot += t[k] * mul[k]
+print "Actual number", running_tot, '=', round(running_tot / float(fc2), 4) * 100
 
 print add_margins(range_plot(thp))
