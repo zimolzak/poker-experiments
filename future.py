@@ -1,5 +1,6 @@
 from convenience import reduce_h
 import numpy
+from count_hands import numbers_of_hole_cards
 
 def pto(pct):
     """Percentage to odds converter. Take a number like 35, return what
@@ -60,14 +61,16 @@ def top_hands_pct(p):
     """Return list of the top p percent of hands, using the lookup table
     called 'HR' (short for Hand Rankings).
     """
-    tot_hands = sum(d['n'] for d in HR)
+    [Table, cells] = numbers_of_hole_cards()
+    tot_hands = sum(Table.values())
     n_hands = int(round(tot_hands * (p / 100.0)))
     # setup for loop
     hands_retrieved = 0
     hand_list = []
     for d in HR:
-        hand_list += [d['h']]
-        hands_retrieved += d['n']
+        hs = d['h']
+        hand_list += [hs]
+        hands_retrieved += Table[hs]
         if hands_retrieved >= n_hands:
             break
     return hand_list
