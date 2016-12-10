@@ -1,3 +1,22 @@
 from future import add_margins, range_plot, top_hands_pct
 from sys import argv
-print add_margins(range_plot(top_hands_pct(float(argv[1]))))
+fc2 = 1326
+p = float(argv[1])
+
+print "Top",  p, 'pct of hands =', fc2 * (p / 100.0), 'hands'
+
+thp = top_hands_pct(p)
+t = {'pairs':0, 'suited':0, 'unsuited':0}
+mul = {'pairs':6, 'suited':4, 'unsuited':12}
+for h in thp:
+    if h[0] == h[1]:
+        t['pairs'] += 1
+    elif 's' in h:
+        t['suited'] += 1
+    else:
+        t['unsuited'] += 1
+
+for k in 'pairs suited unsuited'.split():
+    print t[k], k, '*', mul[k], '=', t[k] * mul[k]
+
+print add_margins(range_plot(thp))
