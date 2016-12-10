@@ -63,7 +63,7 @@ def top_hands_pct(p):
     """
     [Table, cells] = numbers_of_hole_cards()
     tot_hands = sum(Table.values())
-    n_hands = int(round(tot_hands * (p / 100.0)))
+    n_hands = tot_hands * (p / 100.0)
     # setup for loop
     hands_retrieved = 0
     hand_list = []
