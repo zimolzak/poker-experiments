@@ -32,6 +32,7 @@ def numbers_of_hole_cards():
         else:
             cells += [s]
             Table[s] = 1
+    assert sum(Table.values()) == 1326 # 52 choose 2
     return [Table, cells]
 
 if __name__ == '__main__':
