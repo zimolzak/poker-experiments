@@ -60,8 +60,16 @@ def top_hands_pct(p):
     """Return list of the top p percent of hands, using the lookup table
     called 'HR' (short for Hand Rankings).
     """
-    n_hands = int(round(len(HR) * (p / 100.0)))
-    hand_list = map(lambda x: x['h'], HR[0:n_hands])
+    tot_hands = sum(d['n'] for d in HR)
+    n_hands = int(round(tot_hands * (p / 100.0)))
+    # setup for loop
+    hands_retrieved = 0
+    hand_list = []
+    for d in HR:
+        hand_list += [d['h']]
+        hands_retrieved += d['n']
+        if hands_retrieved >= n_hands:
+            break
     return hand_list
 
 def strategy(hand, style='tight'):
