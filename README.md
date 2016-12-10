@@ -17,6 +17,7 @@ Usage
 
     * `python one_time_eval.py as8sqdtc`
     * `python outs_odds_quiz.py` or `source outs_loop.sh`
+    * `python range.py 15`
 * Usually called by makefile
     * best_hole_cards.py (multi-proc, > best_hole_cards > R > txt). 
       Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
@@ -28,6 +29,7 @@ Usage
 * Purely library
     * nuts.py
     * convenience.py
+    * future.py
 
 Depends on
 --------
