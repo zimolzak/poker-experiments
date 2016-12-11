@@ -1,6 +1,12 @@
 from deuces.deuces import Evaluator, Deck, Card
 from convenience import pr, draw_sure
 from itertools import combinations
+from sys import argv
+
+if '--test' in argv:
+    pause = False
+else:
+    pause = True
 
 e = Evaluator()
 deck = Deck()
@@ -23,7 +29,8 @@ flop = deck.draw(3)
 pr(flop)
 h_rc_flop = e.get_rank_class(e.evaluate(hole, flop))
 
-dummy = raw_input('Think hard... ')
+if pause:
+    dummy = raw_input('Think hard... ')
 print
 print "Starting with", e.class_to_string(h_rc_flop)
 
