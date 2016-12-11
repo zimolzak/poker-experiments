@@ -57,3 +57,10 @@ backup :
 	cp evolution_of_nut.csv bak/
 	cp theo_actual_nut.csv bak/
 	cp best_hole_cards.csv bak/
+
+test :
+	python2.7 range.py 15
+	python2.7 count_hands.py
+	python2.7 one_time_eval.py as8sqdtc
+# add other interactive ones here: omaha.py, python outs_odds_quiz.py,
+# source outs_loop.sh
