@@ -1,10 +1,7 @@
 import numpy
 from convenience import reduce_h
-from deuces.deuces import Card, Deck
+from deuces.deuces import Deck
 from itertools import combinations
-
-
-ranks = 'A K Q J T 9 8 7 6 5 4 3 2'.split()
 
 all52 = Deck.GetFullDeck()
 all_hole_explicit = []
@@ -13,35 +10,20 @@ for h in combinations(all52, 2):
 deck_choose_2 = len(all_hole_explicit)
 assert deck_choose_2 == 1326
 
-
-def all_cards():
-    """Enumerate all 52 cards in a standard order."""
-    for r in ranks:
-        for s in 'shdc':
-            yield r+s
-
 def all_hole_cards():
-    """Enumerate all 2-card combos in a standard order. Lumps them
-    together based on suited or off-suit, so outputs strings like '72'
-    or 'T9s'. Example:
-    AA   AA   AA   AKs  AK   AQs ... AA   AA   AK   AKs  AK   AK   AQ   ...
+    """Enumerate all 2-card combos, lumping them together based on suited
+    or off-suit.
 
+    Example:
+    AA   AA   AA   AKs  AK   AQs ... AA   AA   AK   AKs  AK   AK   AQ ...
     Which reflects:
     AsAh AsAd AsAc AsKs AsKh AsQs    AhAd AhAc AhKs AhKh AhKd AhKc AhQs
     """
-    seen = []
-    for x in all_cards():
-        for y in all_cards():
-            if y == x:
-                continue # no such thing as suited pair
-            if x+y in seen or y+x in seen:
-                continue # only count AsKh, not KhAs
-            else:
-                seen += [x+y]
-                s = reduce_h([Card.new(x), Card.new(y)])
-                if s[2] == 'o':
-                    s = s[0:2]
-                yield s
+    for hole in all_hole_explicit:
+        s = reduce_h(hole)
+        if s[2] == 'o':
+            s = s[0:2]
+        yield s
 
 def numbers_of_hole_cards():
     Table = {}
@@ -54,6 +36,25 @@ def numbers_of_hole_cards():
             Table[s] = 1
     assert sum(Table.values()) == deck_choose_2
     return [Table, cells]
+
+def numbers_of_hole_cards_random(n):
+    Table = {}
+    for i in range(n):
+        d = Deck()
+        hole = d.draw(2)
+        s = reduce_h(hole)
+        if s[2] == 'o':
+            s = s[0:2]
+        if s in Table.keys():
+            Table[s] += 1
+        else:
+            Table[s] = 1
+    return Table
+
+
+
+
+#### Functions for calculating and plotting ranges ####
 
 def range_plot(hands):
     """Take a list of strings describing hands. Return 13 lines of dots
