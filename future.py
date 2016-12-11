@@ -1,5 +1,4 @@
 from convenience import reduce_h
-from count_hands import numbers_of_hole_cards
 
 def pto(pct):
     """Percentage to odds converter. Take a number like 35, return what
