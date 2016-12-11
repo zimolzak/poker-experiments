@@ -1,4 +1,4 @@
 for i in {1..10}
 do
-    python outs_odds_quiz.py
+    python2.7 outs_odds_quiz.py
 done
