@@ -1,39 +1,4 @@
-from convenience import reduce_h
-from deuces.deuces import Card
-
-ranks = 'A K Q J T 9 8 7 6 5 4 3 2'.split()
-
-def all_cards():
-    for r in ranks:
-        for s in 'shdc':
-            yield r+s
-
-def all_hole_cards():
-    seen = []
-    for x in all_cards():
-        for y in all_cards():
-            if y == x:
-                continue # no such thing as suited pair
-            if x+y in seen or y+x in seen:
-                continue # only count AsKh, not KhAs
-            else:
-                seen += [x+y]
-                s = reduce_h([Card.new(x), Card.new(y)])
-                if s[2] == 'o':
-                    s = s[0:2]
-                yield s
-
-def numbers_of_hole_cards():
-    Table = {}
-    cells = [] # lets us do it in order
-    for s in all_hole_cards():
-        if s in Table.keys():
-            Table[s] += 1
-        else:
-            cells += [s]
-            Table[s] = 1
-    assert sum(Table.values()) == 1326 # 52 choose 2
-    return [Table, cells]
+from convenience_hole import HR, deck_choose_2, numbers_of_hole_cards
 
 if __name__ == '__main__':
     [Table, cells] = numbers_of_hole_cards()
@@ -41,3 +6,15 @@ if __name__ == '__main__':
         print s, '\t', Table[s]
     print
     print sum(Table.values())
+    print
+
+    HR_tot = sum([row['n'] for row in HR])
+    float_tot = 0
+    for s in cells:
+        for row in HR:
+            if row['h'] == s:
+                n_hands_HR = float(row['n']) / HR_tot * deck_choose_2
+                float_tot += n_hands_HR
+                print s, '\t', round(n_hands_HR, 2)
+    print
+    print float_tot
