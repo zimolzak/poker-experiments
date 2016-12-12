@@ -21,6 +21,8 @@ Usage
     * `python count_hands.py` (convince self there are 1326 hands, 169
       classes)
 
+    * `python3 fun_with_outs_odds.py`
+
 * User-facing, interactive
 
     * `python omaha.py` to practice rapidly mentally figuring out what
