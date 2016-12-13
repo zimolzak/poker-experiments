@@ -64,3 +64,4 @@ test :
 	python2.7 one_time_eval.py as8sqdtc
 	python2.7 omaha.py --test
 	python2.7 outs_odds_quiz.py --test
+	python3 fun_with_outs_odds.py

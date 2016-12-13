@@ -8,25 +8,32 @@ from math import sqrt
 def print_outs(n_outs, maxiter):
     proportion = n_outs / float(maxiter)
     odds = (1 - proportion) / proportion
-    print(n_outs, "outs\t", round(proportion, 3), '\t',
+    print(round(n_outs, 4), "outs\t",
+          round(proportion, 3), '\t',
           round(odds, 3), "\tto 1")
     return odds
 
+print("Outs\tProbab.\tOdds")
+print("----\t------\t----------------")
 for n_outs in range(1,17):
     print_outs(n_outs, 52 - 5)
 print()
 
 print('numerically:')
+print("Outs\t\tProbab.\tOdds")
+print("----------\t------\t----------------")
 x = 6.36
 step = 0.001
 odds = 7
 while x <= odds :
     odds = print_outs(x, 52-5)
     x += step
-
 print()
 
 print('closed form:')
-print('(3 * sqrt(21) - 1) / 2')
+print('(3 * sqrt(21) - 1) / 2 = ')
 magic = (3 * sqrt(21) - 1) / 2
+print(magic)
+print("Outs\t\tProbab.\tOdds")
+print("----------\t------\t----------------")
 print_outs(magic, 52-5)
