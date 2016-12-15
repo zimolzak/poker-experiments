@@ -5,8 +5,9 @@
 #        python one_time_eval.py as8sqdtc3d3c 2skskd
 #        python one_time_eval.py as8sqdtc3d3c 2skskd3h5s
 
-from convenience import find_pcts_multi, pr, str2cards
 import sys
+import time
+from convenience import find_pcts_multi, pr, str2cards
 
 ## argv to strings
 hole_cards_str = sys.argv[1]
@@ -24,12 +25,20 @@ assert len(hole_cards) % 2 == 0
 n_players = len(hole_cards) / 2
 assert n_players > 1
 p = []
+print "Players' hole cards:"
 for i in range(n_players):
     pi = hole_cards[i * 2 : i * 2 + 2]
+    print "  " + str(i+1) + ':',
     pr(pi)
     p.append(pi)
 
-print "Board",
+print "Board:",
 pr(board)
-percents = find_pcts_multi(p, board, iter = 20000)
-print [round(x, 4) for x in percents]
+n_hands = 35000
+start = time.time()
+percents = find_pcts_multi(p, board, iter = n_hands)
+end = time.time()
+print "Equities by player:", [round(x, 4) for x in percents]
+sec = round(end - start, 1)
+rate = int(n_hands / (end - start))
+print "{} hands in {} sec. {} per sec.".format(n_hands, sec, rate)
