@@ -1,5 +1,4 @@
 from deuces.deuces import Card, Evaluator, Deck
-import random
 
 evaluator = Evaluator()
 
@@ -99,7 +98,7 @@ def find_pcts_multi(P, start_b = [], iter = 10000):
     """
     assert len(P) >= 2
     wins_per_player = [0] * len(P)
-    all_hole = reduce(lambda x,y: x+y, P) # do once if static
+    all_hole = reduce(lambda x,y: x+y, P)
     for i in range(iter):
         deck = Deck()
         need = 5 - len(start_b)
