@@ -335,6 +335,7 @@ def find_pcts_multi(P, start_b = [], iter = 10000, vs_range = None):
     all_hole = reduce(lambda x,y: x+y, P) # do once if static
     if vs_range:
         assert len(P) == 1
+        print "vs range parsed", vs_range
         range_list = top_hands_pct(vs_range)
         wins_per_player = [0] * 2
     for i in range(iter):

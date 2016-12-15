@@ -17,6 +17,7 @@ if len(sys.argv) > 2:
 
 ## strings to lists of Card objects
 n_range_villains = 0
+pct_range = False
 if 'p' in hole_cards_str:
     assert hole_cards_str[-1] == 'p'
     assert hole_cards_str.count('p') == 1
@@ -47,7 +48,7 @@ print "Board:",
 pr(board)
 n_hands = 35000
 start = time.time()
-percents = find_pcts_multi(p, board, iter = n_hands)
+percents = find_pcts_multi(p, board, iter = n_hands, vs_range = pct_range)
 end = time.time()
 print "Equities by player:", [round(x, 4) for x in percents]
 sec = round(end - start, 1)
