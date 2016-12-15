@@ -2,6 +2,7 @@ import numpy
 from convenience import reduce_h
 from deuces.deuces import Deck
 from itertools import combinations
+from random import choice
 
 all52 = Deck.GetFullDeck()
 all_hole_explicit = []

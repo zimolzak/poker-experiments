@@ -18,13 +18,13 @@ if len(sys.argv) > 2:
 ## strings to lists of Card objects
 n_range_villains = 0
 pct_range = False
-if 'p' in hole_cards_str:
+if 'p' in hole_cards_str: # parsing of cards+range
     assert hole_cards_str[-1] == 'p'
     assert hole_cards_str.count('p') == 1
     pct_str = hole_cards_str[4:] # everything after 1st 4 ch = pct
     hole_cards_str = hole_cards_str[:4] # 1st 4 ch are hole cards
     print 'met preconditions'
-    pct_range = int(pct_str[:pct_str.find('p')]) # parse the pct
+    pct_range = int(pct_str[:pct_str.find('p')]) # parse the int from the 'p'
     n_range_villains = 1
 hole_cards = str2cards(hole_cards_str)
 board = str2cards(board_str)
@@ -48,7 +48,7 @@ print "Board:",
 pr(board)
 n_hands = 35000
 start = time.time()
-percents = find_pcts_multi(p, board, iter = n_hands, vs_range = pct_range)
+percents = find_pcts_multi(p, board, iter = n_hands)
 end = time.time()
 print "Equities by player:", [round(x, 4) for x in percents]
 sec = round(end - start, 1)
