@@ -16,14 +16,23 @@ if len(sys.argv) > 2:
     board_str = sys.argv[2]
 
 ## strings to lists of Card objects
+n_range_villains = 0
+if 'p' in hole_cards_str:
+    assert hole_cards_str[-1] == 'p'
+    assert hole_cards_str.count('p') == 1
+    pct_str = hole_cards_str[4:] # everything after 1st 4 ch = pct
+    hole_cards_str = hole_cards_str[:4] # 1st 4 ch are hole cards
+    print 'met preconditions'
+    pct_range = int(pct_str[:pct_str.find('p')]) # parse the pct
+    n_range_villains = 1
 hole_cards = str2cards(hole_cards_str)
 board = str2cards(board_str)
 assert len(board) <= 5
 
-## hole card list to player list-of-lists
+## hole card (flat) list to player list-of-lists
 assert len(hole_cards) % 2 == 0
 n_players = len(hole_cards) / 2
-assert n_players > 1
+assert n_players + n_range_villains > 1
 p = []
 print "Players' hole cards:"
 for i in range(n_players):
@@ -31,6 +40,8 @@ for i in range(n_players):
     print "  " + str(i+1) + ':',
     pr(pi)
     p.append(pi)
+if n_range_villains:
+    print "...versus top", pct_range, "% of hands"
 
 print "Board:",
 pr(board)
