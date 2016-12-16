@@ -1,7 +1,8 @@
 import numpy
-from convenience import reduce_h
-from deuces.deuces import Deck
-from itertools import combinations
+from convenience import reduce_h, find_pcts_multi
+from deuces.deuces import Deck, Card
+from itertools import combinations, product
+import random
 
 all52 = Deck.GetFullDeck()
 all_hole_explicit = []
@@ -88,7 +89,8 @@ def add_margins(M_str):
 
 def top_hands_pct(p):
     """Return list of the top p percent of hands, using the lookup table
-    called 'HR' (short for Hand Rankings).
+    called 'HR' (short for Hand Rankings). It's a list of strings like
+    ['AA', 'AKs', 'KJ']
     """
     [Table, cells] = numbers_of_hole_cards()
     tot_hands = sum(Table.values())
@@ -104,6 +106,59 @@ def top_hands_pct(p):
             hand_list += [hs]
             hands_retrieved += Table[hs]
     return hand_list
+
+def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
+    main_winlist = [0, 0]
+    enum_hands = _all_hands_in_range(range_pct)
+    print "  villain hands (before elim) N =",
+    print len(enum_hands)
+    for i in range(iter):
+        p2 = []
+        while not p2:
+            candidate = random.choice(enum_hands)
+            if p1[0] in candidate or p1[1] in candidate or candidate[0] in start_b or candidate[1] in start_b:
+#                print '    ng',
+#                pr(candidate)
+                continue
+            p2 = candidate
+        ## consider just doing one eval, not call to func?
+        winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
+        for i in range(len(winlist)):
+            main_winlist[i] +=  winlist [i]
+    for i in range(len(main_winlist)):
+        main_winlist[i] /= iter
+    return main_winlist
+
+def _all_hands_in_range(p):
+    """Return a list of lists of deuces objects, to answer 'What detailed
+    hole cards are in the best *p* percent of hands?'
+    """
+    list_of_str = top_hands_pct(p)
+    total_hands = []
+    for s in list_of_str:
+        if s[0] == s[1]: # pairs (6 for each)
+            a = [s[0] + 's', s[0] + 'h', s[0] + 'd', s[0] + 'c']
+            for pair_strings in combinations(a, 2):
+                total_hands += [[Card.new(pair_strings[0]),
+                                 Card.new(pair_strings[1])]]
+        elif 's' in s: # suited (4 for each)
+            for suit in 'shdc':
+                total_hands += [[Card.new(s[0] + suit),
+                                 Card.new(s[1] + suit)]]
+        else: # offsuit (12 for each)
+            a = [s[0] + 's', s[0] + 'h', s[0] + 'd', s[0] + 'c']
+            b = [s[1] + 's', s[1] + 'h', s[1] + 'd', s[1] + 'c']
+            for s1, s2 in product(a, b):
+                if s1[1] == s2[1]:
+                    continue # because suited
+                total_hands += [[Card.new(s1),
+                                 Card.new(s2)]]
+    return total_hands
+
+
+
+
+#### bunch of data ####
 
 # Source for hole card rank table -
 # http://www.tightpoker.com/poker_hands.html

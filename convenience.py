@@ -96,6 +96,7 @@ def find_pcts_multi(P, start_b = [], iter = 10000):
     """Given a list-of-lists of players' hole cards and an optional board
     in any state, what is each player's chance of winning?
     """
+    assert len(P) >= 2
     wins_per_player = [0] * len(P)
     all_hole = reduce(lambda x,y: x+y, P)
     for i in range(iter):
