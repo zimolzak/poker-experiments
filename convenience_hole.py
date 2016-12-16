@@ -112,6 +112,7 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     for i in range(iter):
         p2 = _random_from_range(range_pct)
         winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
+        ## NEXT STEP probably better to eval directly, not call find_pcts_multi()
         for i in range(len(winlist)):
             main_winlist[i] +=  winlist [i]
     for i in range(len(main_winlist)):
@@ -119,6 +120,10 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     return main_winlist
 
 def _random_from_range(p):
+    # NEXT STEP better to just return a list of deuces objects. only
+    # get called once, outside the "i in range iter" loop. then do
+    # random.choice w/i the find_pcts_range() func.
+
     list_of_str = top_hands_pct(p)
     total_hands = []
     for s in list_of_str:
