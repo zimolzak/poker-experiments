@@ -1,5 +1,5 @@
 import numpy
-from convenience import reduce_h, find_pcts_multi
+from convenience import reduce_h, find_pcts_multi, pr
 from deuces.deuces import Deck, Card
 from itertools import combinations, product
 import random
@@ -109,32 +109,37 @@ def top_hands_pct(p):
 
 def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     main_winlist = [0, 0]
+    enum_hands = _all_hands_in_range(range_pct)
+    print "  all villain hands:" #delete
+    for j in enum_hands: #delete
+        pr(j)            #deleteme
     for i in range(iter):
-        p2 = _random_from_range(range_pct)
+        p2 = random.choice(enum_hands)
         winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
-        ## NEXT STEP probably better to eval directly, not call find_pcts_multi()
         for i in range(len(winlist)):
             main_winlist[i] +=  winlist [i]
     for i in range(len(main_winlist)):
         main_winlist[i] /= iter
     return main_winlist
 
-def _random_from_range(p):
-    # NEXT STEP better to just return a list of deuces objects. only
-    # get called once, outside the "i in range iter" loop. then do
-    # random.choice w/i the find_pcts_range() func.
-
+def _all_hands_in_range(p):
+    """Return a list of lists of deuces objects, to answer 'What detailed
+    hole cards are in the best *p* percent of hands?'
+    """
     list_of_str = top_hands_pct(p)
     total_hands = []
     for s in list_of_str:
-        if s[0] == s[1]:
+        if s[0] == s[1]: # pairs (6 for each)
             a = [s[0] + 's', s[0] + 'h', s[0] + 'd', s[0] + 'c']
             for pair_strings in combinations(a, 2):
-                total_hands += [list(pair_strings)]
-        ### do suited
-        ##  do offsuit
-    my_hand = random.choice(total_hands)
-    return([Card.new(my_hand[0]), Card.new(my_hand[1])])
+                total_hands += [[Card.new(pair_strings[0]),
+                                 Card.new(pair_strings[1])]]
+        elif 's' in s: # suited (4 for each)
+            for suit in 'shdc':
+                total_hands += [[Card.new(s[0] + suit),
+                                 Card.new(s[1] + suit)]]
+        ##  FIXME do offsuit
+    return total_hands
 
 
 

@@ -53,7 +53,7 @@ if n_range_villains:
     percents = find_pcts_range(p[0], pct_range, start_b = board,
                                iter = n_hands)
 else:
-    percents = find_pcts_multi(p, board, iter = 20)
+    percents = find_pcts_multi(p, board, iter = n_hands)
 end = time.time()
 print "Equities by player:", [round(x, 4) for x in percents]
 sec = round(end - start, 1)
