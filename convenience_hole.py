@@ -1,8 +1,8 @@
 import numpy
 from convenience import reduce_h, find_pcts_multi
 from deuces.deuces import Deck, Card
-from itertools import combinations
-from random import choice
+from itertools import combinations, product
+import random
 
 all52 = Deck.GetFullDeck()
 all_hole_explicit = []
@@ -89,7 +89,8 @@ def add_margins(M_str):
 
 def top_hands_pct(p):
     """Return list of the top p percent of hands, using the lookup table
-    called 'HR' (short for Hand Rankings).
+    called 'HR' (short for Hand Rankings). It's a list of strings like
+    ['AA', 'AKs', 'KJ']
     """
     [Table, cells] = numbers_of_hole_cards()
     tot_hands = sum(Table.values())
@@ -118,7 +119,17 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     return main_winlist
 
 def _random_from_range(p):
-    return([Card.new('Ad'), Card.new('Kd')])
+    list_of_str = top_hands_pct(p)
+    total_hands = []
+    for s in list_of_str:
+        if s[0] == s[1]:
+            a = [s[0] + 's', s[0] + 'h', s[0] + 'd', s[0] + 'c']
+            for pair_strings in combinations(a, 2):
+                total_hands += [list(pair_strings)]
+        ### do suited
+        ##  do offsuit
+    my_hand = random.choice(total_hands)
+    return([Card.new(my_hand[0]), Card.new(my_hand[1])])
 
 
 
