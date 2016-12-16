@@ -138,7 +138,14 @@ def _all_hands_in_range(p):
             for suit in 'shdc':
                 total_hands += [[Card.new(s[0] + suit),
                                  Card.new(s[1] + suit)]]
-        ##  FIXME do offsuit
+        else: # offsuit (12 for each)
+            a = [s[0] + 's', s[0] + 'h', s[0] + 'd', s[0] + 'c']
+            b = [s[1] + 's', s[1] + 'h', s[1] + 'd', s[1] + 'c']
+            for s1, s2 in product(a, b):
+                if s1[1] == s2[1]:
+                    continue # because suited
+                total_hands += [[Card.new(s1),
+                                 Card.new(s2)]]
     return total_hands
 
 
