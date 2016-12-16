@@ -110,11 +110,17 @@ def top_hands_pct(p):
 def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     main_winlist = [0, 0]
     enum_hands = _all_hands_in_range(range_pct)
-    print "  all villain hands:" #delete
-    for j in enum_hands: #delete
-        pr(j)            #deleteme
+    print "  villain hands (before elim) N =",
+    print len(enum_hands)
     for i in range(iter):
-        p2 = random.choice(enum_hands)
+        p2 = []
+        while not p2:
+            candidate = random.choice(enum_hands)
+            if p1[0] in candidate or p1[1] in candidate or candidate[0] in start_b or candidate[1] in start_b:
+#                print '    ng',
+#                pr(candidate)
+                continue
+            p2 = candidate
         winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
         for i in range(len(winlist)):
             main_winlist[i] +=  winlist [i]
