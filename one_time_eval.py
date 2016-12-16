@@ -46,7 +46,10 @@ if n_range_villains:
     print "...versus top", pct_range, "% of hands"
 
 print "Board:",
-pr(board)
+if board:
+    pr(board)
+else:
+    print 'nil'
 n_hands = 35000
 start = time.time()
 if n_range_villains:
