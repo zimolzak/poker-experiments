@@ -7,7 +7,8 @@
 
 import sys
 import time
-from convenience import find_pcts_multi, pr, str2cards
+from convenience import pr, str2cards, find_pcts_multi
+from convenience_hole import find_pcts_range
 
 ## argv to strings
 hole_cards_str = sys.argv[1]
@@ -48,7 +49,11 @@ print "Board:",
 pr(board)
 n_hands = 35000
 start = time.time()
-percents = find_pcts_multi(p, board, iter = n_hands)
+if n_range_villains:
+    percents = find_pcts_range(p[0], pct_range, start_b = board,
+                               iter = n_hands)
+else:
+    percents = find_pcts_multi(p, board, iter = n_hands)
 end = time.time()
 print "Equities by player:", [round(x, 4) for x in percents]
 sec = round(end - start, 1)

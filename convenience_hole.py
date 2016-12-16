@@ -1,6 +1,6 @@
 import numpy
-from convenience import reduce_h
-from deuces.deuces import Deck
+from convenience import reduce_h, find_pcts_multi
+from deuces.deuces import Deck, Card
 from itertools import combinations
 from random import choice
 
@@ -105,6 +105,25 @@ def top_hands_pct(p):
             hand_list += [hs]
             hands_retrieved += Table[hs]
     return hand_list
+
+def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
+    main_winlist = [0, 0]
+    for i in range(iter):
+        p2 = _random_from_range(range_pct)
+        winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
+        for i in range(len(winlist)):
+            main_winlist[i] +=  winlist [i]
+    for i in range(len(main_winlist)):
+        main_winlist[i] /= iter
+    return main_winlist
+
+def _random_from_range(p):
+    return([Card.new('Ad'), Card.new('Kd')])
+
+
+
+
+#### bunch of data ####
 
 # Source for hole card rank table -
 # http://www.tightpoker.com/poker_hands.html
