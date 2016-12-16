@@ -65,3 +65,45 @@ test :
 	python2.7 omaha.py --test
 	python2.7 outs_odds_quiz.py --test
 	python3 fun_with_outs_odds.py
+
+manytest : test
+	python2.7 one_time_eval.py 3c4ckdqd 4d9s7d > /dev/null
+	python2.7 one_time_eval.py 3c4ckdqh 4h9s7d > /dev/null
+	python2.7 one_time_eval.py 4s4ckdqh ac9s7d > /dev/null
+	python2.7 one_time_eval.py 6s7s15p > /dev/null
+	python2.7 one_time_eval.py 6s7s15p 2s3s4d > /dev/null
+	python2.7 one_time_eval.py 6s7s15p 8s9s4d > /dev/null
+	python2.7 one_time_eval.py 6s7s5p 2s3s4d > /dev/null
+	python2.7 one_time_eval.py 9h9d10p > /dev/null
+	python2.7 one_time_eval.py 9h9d15p > /dev/null
+	python2.7 one_time_eval.py 9h9d15p  > /dev/null
+	python2.7 one_time_eval.py 9h9d15p asac3h > /dev/null
+	python2.7 one_time_eval.py 9h9d15p asackc > /dev/null
+	python2.7 one_time_eval.py 9h9d1p  > /dev/null
+	python2.7 one_time_eval.py 9h9d28p > /dev/null
+	python2.7 one_time_eval.py 9h9d2p > /dev/null
+	python2.7 one_time_eval.py 9h9d4p > /dev/null
+	python2.7 one_time_eval.py 9h9d6p > /dev/null
+	python2.7 one_time_eval.py 9h9d7p > /dev/null
+	python2.7 one_time_eval.py 9h9d80p > /dev/null
+	python2.7 one_time_eval.py 9h9dahad asackc > /dev/null
+	python2.7 one_time_eval.py 9h9dkskc  > /dev/null
+	python2.7 one_time_eval.py ahac100p 3c9s7h > /dev/null
+	python2.7 one_time_eval.py ahac40p 3c9s7h > /dev/null
+	python2.7 one_time_eval.py as4ckdqh  > /dev/null
+	python2.7 one_time_eval.py as4ckdqh 4h9s7d > /dev/null
+	python2.7 one_time_eval.py asjd10p 3c9sjh > /dev/null
+	python2.7 one_time_eval.py asjd10p 3c9sjhac > /dev/null
+	python2.7 one_time_eval.py asjs10p 3c9sjh2s > /dev/null
+	python2.7 one_time_eval.py asjs10p 3s9sjh2s > /dev/null
+	python2.7 one_time_eval.py askd15p > /dev/null
+	python2.7 one_time_eval.py askd4s4d > /dev/null
+	python2.7 one_time_eval.py askd15p > /dev/null
+	python2.7 one_time_eval.py asks15p > /dev/null
+	python2.7 one_time_eval.py ksac11p > /dev/null
+	python2.7 one_time_eval.py ksac28p > /dev/null
+	python2.7 one_time_eval.py qsjd100p 3c9s7h > /dev/null
+	python2.7 one_time_eval.py qsjd10p 3c9sjh > /dev/null
+	python2.7 one_time_eval.py qsjd15p 3c9s7h > /dev/null
+	python2.7 one_time_eval.py qsjd40p 3c9s7h > /dev/null
+	python2.7 one_time_eval.py qsjd40p 3c9sjh > /dev/null
