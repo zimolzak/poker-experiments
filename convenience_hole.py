@@ -1,5 +1,5 @@
 import numpy
-from convenience import reduce_h, find_pcts_multi, pr
+from convenience import reduce_h, find_pcts_multi
 from deuces.deuces import Deck, Card
 from itertools import combinations, product
 import random
@@ -121,6 +121,7 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
 #                pr(candidate)
                 continue
             p2 = candidate
+        ## consider just doing one eval, not call to func?
         winlist = find_pcts_multi([p1, p2], start_b = start_b, iter = 1)
         for i in range(len(winlist)):
             main_winlist[i] +=  winlist [i]
