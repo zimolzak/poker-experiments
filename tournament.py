@@ -17,11 +17,19 @@ def black_red(pxs, suits):
         return [Card.new(pxs[0] + suits[0]), Card.new(pxs[1] + suits[0])]
     else:
         return [Card.new(pxs[0] + suits[0]), Card.new(pxs[1] + suits[1])]
-    
 
-for p1s in all_169_hands():
-#    for p2s in all_169_hands():
-#        if p1s == p2s:
-#            continue
-    p1 = black_red(p1s, 'sc')
-    pr(p1)
+def detailed_cards(color):
+    assert color in ['black', 'red']
+    if color == 'black':
+        suits = 'sc'
+    else:
+        suits = 'hd'
+    for ps in all_169_hands():
+        p = black_red(ps, suits)
+        yield p
+
+for x in detailed_cards('black'):
+    pr(x)
+for x in detailed_cards('red'):
+    pr(x)
+
