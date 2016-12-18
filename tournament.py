@@ -28,7 +28,26 @@ def detailed_cards(color):
         p = black_red(ps, suits)
         yield p
 
-for x in product(detailed_cards('black'), detailed_cards('red')):
+dcb = []
+for e in detailed_cards('black'):
+    dcb.append(e)
+
+#for i, x in enumerate(dcb):
+#    print i
+#    pr(x)
+
+my_slice = 2
+tot_slice = 4
+len_slice = 1.0 / tot_slice * len(dcb)
+print 'len', len_slice
+start = int(len_slice * (my_slice - 1))
+end = int(start + len_slice)
+print start, end
+pr(dcb[start])
+pr(dcb[end-1])
+
+
+for x in product(dcb[start:end], detailed_cards('red')):
 #    pr(x[0])
 #    pr(x[1])
     pcts = find_pcts_multi(list(x), iter=1000)
