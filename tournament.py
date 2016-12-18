@@ -28,16 +28,12 @@ def detailed_cards(color):
         p = black_red(ps, suits)
         yield p
 
-i = 0
 for x in product(detailed_cards('black'), detailed_cards('red')):
-    i += 1
-    pr(x[0])
-    pr(x[1])
-    pcts = find_pcts_multi(list(x))
-    print pcts
+#    pr(x[0])
+#    pr(x[1])
+    pcts = find_pcts_multi(list(x), iter=1000)
+#    print pcts
     if pcts[0] / pcts[1] > 1.5:
-        print '  ** P1 favorite', reduce_h(x[0]), '->', reduce_h(x[1])
+        print reduce_h(x[0]), '->', reduce_h(x[1])
     elif pcts[1] / pcts[0] > 1.5:
-        print '  ** P2 favorite', reduce_h(x[0]), '<-', reduce_h(x[1])
-    if i > 100:
-        break
+        print reduce_h(x[0]), '<-', reduce_h(x[1])
