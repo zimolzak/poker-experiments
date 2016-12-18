@@ -32,6 +32,12 @@ pct_vs_time.csv :
 	python pct_vs_time.py >> pct_vs_time.csv
 	sleep 2
 
+tournament :
+	python2.7 tournament.py 1 4 > t14.txt &
+	python2.7 tournament.py 2 4 > t24.txt &
+	python2.7 tournament.py 3 4 > t34.txt &
+	python2.7 tournament.py 4 4 > t44.txt &
+
 clean :
 	rm -f most_common_hands.txt
 	rm -f evolution_of_nut.csv
