@@ -1,8 +1,12 @@
+from sys import argv
 from itertools import product
 from deuces.deuces import Card
 from convenience import pr, find_pcts_multi, reduce_h
 
 r = 'AKQJT98765432'
+
+my_slice = int(argv[1])
+tot_slice = int(argv[2])
 
 def all_169_hands():
     for x in product(r, r):
@@ -28,30 +32,29 @@ def detailed_cards(color):
         p = black_red(ps, suits)
         yield p
 
+#### slice up search space
+
 dcb = []
 for e in detailed_cards('black'):
     dcb.append(e)
 
-#for i, x in enumerate(dcb):
-#    print i
-#    pr(x)
-
-my_slice = 2
-tot_slice = 4
 len_slice = 1.0 / tot_slice * len(dcb)
-print 'len', len_slice
+print '// Length of slice', len_slice
 start = int(len_slice * (my_slice - 1))
 end = int(start + len_slice)
-print start, end
-pr(dcb[start])
-pr(dcb[end-1])
+if my_slice == tot_slice:
+    slice = dcb[start:]
+else:
+    slice = dcb[start:end]
+print "// Start, end indices", start, end
+print "// From hand", reduce_h(slice[0])
+print "// ...to hand", reduce_h(slice[-1])
+print
 
+### do search
 
-for x in product(dcb[start:end], detailed_cards('red')):
-#    pr(x[0])
-#    pr(x[1])
+for x in product(slice, detailed_cards('red')):
     pcts = find_pcts_multi(list(x), iter=1000)
-#    print pcts
     if pcts[0] / pcts[1] > 1.5:
         print reduce_h(x[0]), '->', reduce_h(x[1])
     elif pcts[1] / pcts[0] > 1.5:
