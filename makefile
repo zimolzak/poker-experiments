@@ -1,4 +1,4 @@
-all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv pct_vs_time.csv best_hole_cards.csv
+all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv pct_vs_time.csv best_hole_cards.csv tournament tournament.png
 	Rscript analyses.R > output.txt
 	perl -pi -e 's/\n/\r\n/g' output.txt
 
@@ -46,13 +46,14 @@ tournament.png : t14.txt t24.txt t34.txt t44.txt
 	cat uniq.txt >> tournament.dot
 	echo '}' >> tournament.dot
 	dot -Tpng tournament.dot > tournament.png
+	cp tournament.png ~/Dropbox/poker_graph
 
 clean :
 	rm -f most_common_hands.txt
 	rm -f evolution_of_nut.csv
 	rm -f theo_actual_nut.csv
 	rm -f best_hole_cards.csv
-	rm -f cattd.txt
+	rm -f cattd.txt filtered.txt tournament.dot tournament.png
 
 cleanoutputs :
 	rm -f Rplots.pdf
