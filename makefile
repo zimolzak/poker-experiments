@@ -40,6 +40,12 @@ tournament :
 
 tournament.png : t14.txt t24.txt t34.txt t44.txt
 	cat t14.txt t24.txt t34.txt t44.txt > cattd.txt
+	python2.7 filt.py  > filtered.txt
+	sort filtered.txt | uniq > uniq.txt
+	echo 'digraph {' > tournament.dot
+	cat uniq.txt >> tournament.dot
+	echo '}' >> tournament.dot
+	dot -Tpng tournament.dot > tournament.png
 
 clean :
 	rm -f most_common_hands.txt
