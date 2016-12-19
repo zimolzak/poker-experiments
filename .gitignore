@@ -5,3 +5,6 @@
 *.pyc
 *.csv
 *.bak
+*.dot
+*.png
+r.py
