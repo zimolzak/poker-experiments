@@ -25,32 +25,38 @@ ranges = [[0,6], [3, 8], [5, 10]]
 maxidx = len(ranges) - 1
 elos = [1000] * len(ranges)
 
+def update_table(a, b, winner, table):
+    assert winner == a or winner == b
+    if winner == a:
+        ascore = 1
+        bscore = 0
+    else:
+        ascore = 0
+        bscore = 1
+    ex = expected(table[a], table[b])
+    ea = elo(table[a], ex, ascore)
+    eb = elo(table[b], ex, bscore)
+    table[a] = ea
+    table[b] = eb
+    return table
+
 for i in range(100):
+    # choose 2 opponents
     a = random.randint(0, maxidx)
     b = a
     while b == a:
         b = random.randint(0, maxidx)
-    #print a, b
-    #print ranges[a], ranges[b]
+    # draw variate for each opponent and compare
     a_s = random.uniform(*ranges[a])
     b_s = random.uniform(*ranges[b])
-    #print a_s, b_s
-    ascore = 0.5
-    bscore = 0.5
+    winner = None
     if a_s > b_s:
         print a, "wins", b, "loses", 
-        ascore = 1
-        bscore = 0
+        winner = a
     else:
         print b, "wins", a, "loses", 
-        ascore = 0
-        bscore = 1
-    ex = expected(elos[a], elos[b])
-    #print "expected", ex
-    ea = elo(elos[a], ex, ascore)
-    eb = elo(elos[b], ex, bscore)
-    #print a, "new", ea
-    #print b, "new", eb
-    elos[a] = ea
-    elos[b] = eb
+        winner = b
+    # do the update
+    elos = update_table(a, b, winner, elos)
+    # print
     print map(lambda x: round(x, 1), elos)
