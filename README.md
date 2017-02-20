@@ -12,6 +12,9 @@ Usage
       hands, and the "flow" of several heads-up situations over the
       course of several streets.
 
+    * `make tournament; make tournament.png` gets you a nice PNG graph
+      of some hands that beat some other hands.
+
 * User-facing, print to standard output
 
     * `python one_time_eval.py as8sqdtc` (equity calculator)
@@ -44,6 +47,8 @@ Usage
 
     * pct_vs_time.py (multi-proc, > pct_vs_time > R > pdf). Long
       compute.
+
+    * tournament.py, filt.py 
 
 * Purely library
 
