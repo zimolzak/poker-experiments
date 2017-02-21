@@ -58,6 +58,11 @@ print
 
 ### do search
 
+def printsort(LoT):
+    S = sorted(LoT, key=lambda tup: tup[1], reverse=True)
+    for e in S:
+        print e[0], '\t', e[1]
+
 if elo:
     all_169_static = []
     for e in all_169_hands():
@@ -75,7 +80,9 @@ if elo:
         else:
             winner = b # FIXME: ignores ties, which affect Elo differently.
         elos = update_table(a, b, winner, elos)
-    print zip(all_169_static, elos)
+    z = zip(all_169_static, elos)
+    # print z
+    printsort(z)
     quit()
 
 for x in product(slice, detailed_cards('red')):
