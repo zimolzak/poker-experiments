@@ -2,11 +2,16 @@ from sys import argv
 from itertools import product
 from deuces.deuces import Card
 from convenience import pr, find_pcts_multi, reduce_h
+from elo import update_table
 
 r = 'AKQJT98765432'
 
 my_slice = int(argv[1])
 tot_slice = int(argv[2])
+elo = False
+if len(argv) > 3:
+    if argv[3] == 'elo':
+        elo = True
 
 def all_169_hands():
     for x in product(r, r):
@@ -52,6 +57,26 @@ print "// ...to hand", reduce_h(slice[-1])
 print
 
 ### do search
+
+if elo:
+    all_169_static = []
+    for e in all_169_hands():
+        if not 's' in e:
+            e = e + 'o'
+        all_169_static.append(e)
+    elos = [1000] * len(all_169_static)
+    for x in product(slice, detailed_cards('red')):
+        a = all_169_static.index(reduce_h(x[0]))
+        b = all_169_static.index(reduce_h(x[1]))
+        winner = None
+        pcts = find_pcts_multi(list(x), iter=1)
+        if pcts[0] > pcts[1]:
+            winner = a
+        else:
+            winner = b # FIXME: ignores ties, which affect Elo differently.
+        elos = update_table(a, b, winner, elos)
+    print zip(all_169_static, elos)
+    quit()
 
 for x in product(slice, detailed_cards('red')):
     pcts = find_pcts_multi(list(x), iter=1000)
