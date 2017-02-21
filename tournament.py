@@ -12,6 +12,7 @@ elo = False
 if len(argv) > 3:
     if argv[3] == 'elo':
         elo = True
+        elo_iter = 15 # about 5-6 sec per 1, on MacBook Pro
 
 def all_169_hands():
     for x in product(r, r):
@@ -71,15 +72,16 @@ if elo:
         all_169_static.append(e)
     elos = [1000] * len(all_169_static)
     for x in product(slice, detailed_cards('red')):
-        a = all_169_static.index(reduce_h(x[0]))
-        b = all_169_static.index(reduce_h(x[1]))
-        winner = None
-        pcts = find_pcts_multi(list(x), iter=1)
-        if pcts[0] > pcts[1]:
-            winner = a
-        else:
-            winner = b # FIXME: ignores ties, which affect Elo differently.
-        elos = update_table(a, b, winner, elos)
+        for i in range(elo_iter):
+            a = all_169_static.index(reduce_h(x[0]))
+            b = all_169_static.index(reduce_h(x[1]))
+            winner = None
+            pcts = find_pcts_multi(list(x), iter=1)
+            if pcts[0] > pcts[1]:
+                winner = a
+            else:
+                winner = b # FIXME: ignores ties, which affect Elo differently.
+            elos = update_table(a, b, winner, elos)
     z = zip(all_169_static, elos)
     # print z
     printsort(z)
