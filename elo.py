@@ -40,23 +40,24 @@ def update_table(a, b, winner, table):
     table[b] = eb
     return table
 
-for i in range(100):
-    # choose 2 opponents
-    a = random.randint(0, maxidx)
-    b = a
-    while b == a:
-        b = random.randint(0, maxidx)
-    # draw variate for each opponent and compare
-    a_s = random.uniform(*ranges[a])
-    b_s = random.uniform(*ranges[b])
-    winner = None
-    if a_s > b_s:
-        print a, "wins", b, "loses", 
-        winner = a
-    else:
-        print b, "wins", a, "loses", 
-        winner = b
-    # do the update
-    elos = update_table(a, b, winner, elos)
-    # print
-    print map(lambda x: round(x, 1), elos)
+if __name__ == '__main__':
+    for i in range(100):
+        # choose 2 opponents
+        a = random.randint(0, maxidx)
+        b = a
+        while b == a:
+            b = random.randint(0, maxidx)
+        # draw variate for each opponent and compare
+        a_s = random.uniform(*ranges[a])
+        b_s = random.uniform(*ranges[b])
+        winner = None
+        if a_s > b_s:
+            print a, "wins", b, "loses", 
+            winner = a
+        else:
+            print b, "wins", a, "loses", 
+            winner = b
+        # do the update
+        elos = update_table(a, b, winner, elos)
+        # print
+        print map(lambda x: round(x, 1), elos)
