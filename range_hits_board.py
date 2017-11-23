@@ -12,9 +12,24 @@ rank_class_keys = ['Straight Flush', 'Four of a Kind', 'Full House', 'Flush',
                    ] # we do this to output them in order
 rc_counts = {}
 
+deuces_plus = 'AA KK QQ JJ TT 99 88 77 66 55 44 33 22'.split()
+bway = 'A K Q J T'.split()
+ATB = []
+for i in bway:
+    for j in bway:
+        if i == j:
+            continue
+        elif bway.index(i) > bway.index(j):
+            ATB.append(j + i)
+        elif bway.index(i) < bway.index(j):
+            ATB.append(i + j + 's')
+assert len(ATB) == 20
+
 ## Input vars:
 board = [Card.new('Qs'), Card.new('Td'), Card.new('4c')]
 range_list = ['AA', 'KK', 'QQ', 'AK', 'AKs', 'KQ', 'KQs', 'JJ', '33', '22', 'A4', '99', 'AJ', 'KJ']
+
+range_list = deuces_plus + ATB
 
 ## tricky ones highlighted:
 ##  1   2    3    4       5        6     7          8                9
@@ -108,3 +123,6 @@ for s in rank_class_keys:
     if s in rc_counts.keys():
         n = rc_counts[s]
         print pad_to(16, s), n, '\t', round(n / denom * 100, 2)
+for k in rc_counts.keys():
+    if k not in rank_class_keys:
+        print 'Unexpected key in rc_counts:', k
