@@ -16,15 +16,21 @@ range_list = ['AA', 'KK', 'QQ', 'AK', 'AKs']
 print "Range:", range_list
 print "Board:",
 pr(board)
-hr_list = [0] * 10
+rc_counts = [0] * 10
 lol = all_hands_in_range(range_list)
 for L in lol:
     hr = e.evaluate(L, board)
     rc = e.get_rank_class(hr)
-    hr_list[rc] += 1
+    rc_counts[rc] += 1
 
+def pad_to(n, s):
+    while len(s) < n:
+        s += ' '
+    return s
 
 print('\nResults\n========')
-print hr_list
+denom = float(sum(rc_counts))
 for i in range(1,10):
-    print e.class_to_string(i), hr_list[i]
+    n = rc_counts[i]
+    rc_str = pad_to(15, e.class_to_string(i))
+    print rc_str, n, '\t', round(n / denom * 100, 2)
