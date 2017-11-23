@@ -121,7 +121,7 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
     what is each player's chance of winning (equity)?
     """
     main_winlist = [0, 0]
-    enum_hands = _all_hands_in_range(range_pct)
+    enum_hands = all_hands_in_range(top_hands_pct(range_pct))
     print "  villain hands (before elim) N =",
     print len(enum_hands)
     for i in range(iter):
@@ -141,11 +141,10 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
         main_winlist[i] /= iter
     return main_winlist
 
-def _all_hands_in_range(p):
+def all_hands_in_range(list_of_str):
     """Return a list of lists of deuces objects, to answer 'What detailed
-    hole cards (combos) are in the best *p* percent of hands?'
+    hole cards (combos) are in range provided?'
     """
-    list_of_str = top_hands_pct(p)
     total_hands = []
     for s in list_of_str:
         if s[0] == s[1]: # pairs (6 for each)
