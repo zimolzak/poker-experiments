@@ -1,4 +1,4 @@
-from convenience_hole import all_hands_in_range, add_margins, range_plot
+from convenience_hole import all_hands_in_range, add_margins, range_plot, deck_choose_2
 from convenience import pr
 from deuces.deuces import Card, Evaluator
 
@@ -8,12 +8,13 @@ rank_class_keys = ['Straight Flush', 'Four of a Kind', 'Full House', 'Flush',
                    'Set', 'Trips', 'Three of a Kind to Board',
                    'Two Pair',
                    'Overpair', 'Top Pair', '1.5 Pair', 'Middle Pair', 'Weak Pair',
-                   'High Card'] # we do this so we keep them in order
+                   'Ace High in Hole', 'Ace High to Board', 'No Made Hand'
+                   ] # we do this to output them in order
 rc_counts = {}
 
 ## Input vars:
 board = [Card.new('Qs'), Card.new('Td'), Card.new('4c')]
-range_list = ['AA', 'KK', 'QQ', 'AK', 'AKs', 'KQ', 'KQs', 'JJ', '33', '22', 'A4', '99']
+range_list = ['AA', 'KK', 'QQ', 'AK', 'AKs', 'KQ', 'KQs', 'JJ', '33', '22', 'A4', '99', 'AJ', 'KJ']
 
 ## tricky ones highlighted:
 ##  1   2    3    4       5        6     7          8                9
@@ -69,6 +70,15 @@ def distinguish_three_of(hole, board):
     else:
         return 'Trips'
 
+def distinguish_high_card(hole, board):
+    hrs, brs = extract_ranks(hole, board)
+    if 12 in hrs:
+        return 'Ace High in Hole'
+    if 12 in brs:
+        return 'Ace High to Board'
+    else:
+        return 'No Made Hand'
+
 #### main loop ####
 
 lol = all_hands_in_range(range_list)
@@ -80,6 +90,8 @@ for L in lol:
         s = distinguish_pairs(L, board)
     if s == 'Three of a Kind':
         s = distinguish_three_of(L, board)
+    if s == 'High Card':
+        s = distinguish_high_card(L, board)
     increment_dict(rc_counts, s)
 
 #### print ####
@@ -91,8 +103,8 @@ def pad_to(n, s):
 
 print('\nResults\n========')
 denom = float(sum(rc_counts.values()))
-print int(denom), 'combos.\n'
+print int(denom), 'combos.', round(denom / deck_choose_2 * 100, 1), 'percent of hands.\n'
 for s in rank_class_keys:
     if s in rc_counts.keys():
         n = rc_counts[s]
-        print pad_to(15, s), n, '\t', round(n / denom * 100, 2)
+        print pad_to(16, s), n, '\t', round(n / denom * 100, 2)
