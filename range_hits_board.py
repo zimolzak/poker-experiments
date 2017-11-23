@@ -4,9 +4,11 @@ from deuces.deuces import Card, Evaluator
 
 e = Evaluator()
 rank_class_keys = ['Straight Flush', 'Four of a Kind', 'Full House', 'Flush',
-                   'Straight', 'Three of a Kind', 'Two Pair',
+                   'Straight',
+                   'Set', 'Trips', 'Three of a Kind to Board',
+                   'Two Pair',
                    'Overpair', 'Top Pair', '1.5 Pair', 'Middle Pair', 'Weak Pair',
-                   'High Card']
+                   'High Card'] # we do this so we keep them in order
 rc_counts = {}
 
 ## Input vars:
@@ -31,11 +33,15 @@ def increment_dict(d, k):
         d[k] = 1
     return d
 
-def distinguish_pairs(hole, board):
-    # assumes no trips or set
+def extract_ranks(hole, board):
     hrs = [Card.get_rank_int(c) for c in hole]
     brs = [Card.get_rank_int(c) for c in board]
     brs.sort(reverse = True) # high card is index 0
+    return hrs, brs
+
+def distinguish_pairs(hole, board):
+    # assumes no trips or set
+    hrs, brs = extract_ranks(hole, board)
     if hrs[0] == max(brs) or hrs[1] == max(brs):
         return 'Top Pair'
     elif hrs[0] == hrs[1]: # pocket pair
@@ -50,6 +56,19 @@ def distinguish_pairs(hole, board):
     else:
         return 'Weak Pair'
 
+def distinguish_three_of(hole, board):
+    hr = e.evaluate(hole, board)
+    rc = e.get_rank_class(hr)
+    s = e.class_to_string(rc)
+    assert s == 'Three of a Kind'
+    hrs, brs = extract_ranks(hole, board)
+    if brs[0] == brs[1] == brs[2]:
+        return 'Three of a Kind to Board'
+    elif hrs[0] == hrs[1]:
+        return 'Set'
+    else:
+        return 'Trips'
+
 #### main loop ####
 
 lol = all_hands_in_range(range_list)
@@ -59,6 +78,8 @@ for L in lol:
     s = e.class_to_string(rc)
     if s == 'Pair':
         s = distinguish_pairs(L, board)
+    if s == 'Three of a Kind':
+        s = distinguish_three_of(L, board)
     increment_dict(rc_counts, s)
 
 #### print ####
