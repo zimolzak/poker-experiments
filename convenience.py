@@ -80,7 +80,7 @@ def draw_sure(deck, n, exclusions):
 
 def find_pcts(p1, p2, start_b = [], iter = 10000):
     """Given 2 players' hole cards and an optional board in any state,
-    what is each player's chance of winning?
+    what is each player's chance of winning (equity)?
     """
     win_record = []
     for i in range(iter):
@@ -94,7 +94,7 @@ def find_pcts(p1, p2, start_b = [], iter = 10000):
 
 def find_pcts_multi(P, start_b = [], iter = 10000):
     """Given a list-of-lists of players' hole cards and an optional board
-    in any state, what is each player's chance of winning?
+    in any state, what is each player's chance of winning (equity)?
     """
     assert len(P) >= 2
     wins_per_player = [0] * len(P)

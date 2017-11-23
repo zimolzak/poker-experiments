@@ -24,7 +24,7 @@ Usage
     * `python count_hands.py` (convince self there are 1326 hands, 169
       classes)
 
-    * `python3 fun_with_outs_odds.py`
+    * `python3 fun_with_outs_odds.py` (just math trivia)
 
 * User-facing, interactive
 

@@ -2,13 +2,16 @@ from math import log
 from deuces.deuces import Card
 
 def suited3(hand):
+    """Are there three or more of any one suit? If yes, return the cards
+    in the most populous suit.
+    """
     L = [0] * 4
     Lc = []
     for c in hand:
-        suit = int(log(Card.get_suit_int(c), 2))
+        suit = int(log(Card.get_suit_int(c), 2)) # 0, 1, 2, 3
         L[suit] += 1
     if max(L) >= 3:
-        suit_to_pull = 2 ** L.index(max(L))
+        suit_to_pull = 2 ** L.index(max(L)) # deuces reps as 1, 2, 4, 8
         for c in hand:
             if Card.get_suit_int(c) == suit_to_pull:
                 Lc.append(c)
@@ -34,6 +37,7 @@ def hand2ranks(h):
     return Lr
 
 def trips_or_pair(hand, or_quads = False):
+    """Is this board or hand paired up?"""
     Lr = hand2ranks(hand)
     for i in range(13):
         if Lr.count(i) == 2 or Lr.count(i) == 3:
@@ -60,6 +64,14 @@ def trips_is_nuts(hand):
         len(suited3(hand)) < 3
 
 def nut_hand(hand):
+    """Return a string describing the highest possible 5-card poker hand,
+    given an existing hand that can contribute (usually this is the
+    community cards). Main function in this module. Assume we will use
+    at most 2 hole cards and at least 3 community cards. Should work
+    for Texas Hold 'em and for Omaha. That is, should work independent
+    of the *total* number of hole cards, as long as two is the most
+    you can use.
+    """
     if poss_straight(suited3(hand)):
         return '1 Straight Flush'
     elif trips_or_pair(hand):

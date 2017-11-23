@@ -11,9 +11,10 @@ for h in combinations(all52, 2):
 deck_choose_2 = len(all_hole_explicit)
 assert deck_choose_2 == 1326
 
-def all_hole_cards():
-    """Enumerate all 2-card combos, lumping them together based on suited
-    or off-suit.
+def _all_hole_cards():
+    """Enumerate all 1326 2-card combos, lumping them together based on
+    suited or off-suit. Do this as a generator, yielding these in
+    somewhat specialized string form.
 
     Example:
     AA   AA   AA   AKs  AK   AQs ... AA   AA   AK   AKs  AK   AK   AQ ...
@@ -27,9 +28,13 @@ def all_hole_cards():
         yield s
 
 def numbers_of_hole_cards():
+    """Return a dict counting how many combos in each of the 169 hands,
+    along the lines of {'AA': 6, 'AKs': 4, 'AQ': 12, ...}. Built by
+    iterating thru each of the 1326 combos one by one
+    """
     Table = {}
     cells = [] # lets us do it in order
-    for s in all_hole_cards():
+    for s in _all_hole_cards():
         if s in Table.keys():
             Table[s] += 1
         else:
@@ -39,6 +44,9 @@ def numbers_of_hole_cards():
     return [Table, cells]
 
 def numbers_of_hole_cards_random(n):
+    """Return a dict counting combos in each hand, but built by drawing 2
+    at random (not normalizing to n).
+    """
     Table = {}
     for i in range(n):
         d = Deck()
@@ -108,6 +116,10 @@ def top_hands_pct(p):
     return hand_list
 
 def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
+    """Equity calculator for hand versus range. Given 1 player's hole
+    cards and one range expressed as a percent, and an optional board,
+    what is each player's chance of winning (equity)?
+    """
     main_winlist = [0, 0]
     enum_hands = _all_hands_in_range(range_pct)
     print "  villain hands (before elim) N =",
@@ -131,7 +143,7 @@ def find_pcts_range(p1, range_pct, start_b = [], iter = 10000):
 
 def _all_hands_in_range(p):
     """Return a list of lists of deuces objects, to answer 'What detailed
-    hole cards are in the best *p* percent of hands?'
+    hole cards (combos) are in the best *p* percent of hands?'
     """
     list_of_str = top_hands_pct(p)
     total_hands = []

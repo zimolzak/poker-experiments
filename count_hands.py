@@ -1,6 +1,6 @@
 from convenience_hole import HR, deck_choose_2, numbers_of_hole_cards, numbers_of_hole_cards_random
 
-standard_order = []
+standard_order = [] # Becomes list of strings ['AA', 'KK', 'QQ', ... 'AKs', ...]
 ranks = 'AKQJT98765432'
 for c in ranks:
     standard_order += [c+c] #pairs
