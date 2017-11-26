@@ -80,7 +80,7 @@ test :
 	python2.7 range.py 15
 	python2.7 count_hands.py
 	python2.7 one_time_eval.py as8sqdtc
-	python2.7 omaha.py --test
+	python2.7 omaha_nuts_quiz.py --test
 	python2.7 outs_odds_quiz.py --test
 	python3 fun_with_outs_odds.py
 

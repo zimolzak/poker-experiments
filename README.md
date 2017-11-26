@@ -29,7 +29,7 @@ Usage
 
 * User-facing, interactive
 
-    * `python omaha.py` to practice rapidly mentally figuring out what
+    * `python omaha_nuts_quiz.py` to practice rapidly mentally figuring out what
       is the nut hand.
 
     * `python outs_odds_quiz.py` or `source outs_loop.sh` to practice
@@ -138,7 +138,7 @@ most_common_hands.py
        Straight  Straight Flush Three of a Kind        Two Pair 
           0.411           0.002           2.128           4.875 
 
-omaha.py (quiz about the nut hand)
+omaha_nuts_quiz.py (quiz about the nut hand)
 --------
 
       [ Q ♣ ] , [ A ❤ ] , [ 4 ❤ ]  
