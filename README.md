@@ -3,8 +3,30 @@ Poker Experiments
 
 Just me playing around with `deuces` for Python.
 
+Includes **tools** like an equity calculator, how a range hits a
+board, and finding top x% of hands. Does a number **analyses** often
+using Monte Carlo methods, on such topics as how often the nut hand
+evolves or is realized per street. Has some **quizzes** for drilling
+the response to various boards.
+
 Usage
 --------
+* User-facing, print to standard output (Do `make test` to try out
+  these and the interactive ones.)
+
+    * `python one_time_eval.py as8sqdtc` (equity calculator)
+
+    * `python range_hits_board.py` (Currently hardcoded analysis of
+      how Q♠ T♦ 4♣ hits a board of deuces plus any two broadways. Will
+      later take command line arguments.
+
+    * `python range.py 15` (plot a preflop range)
+
+    * `python count_hands.py` (convince self there are 1326 hands, 169
+      classes)
+
+    * `python3 fun_with_outs_odds.py` (just math trivia)
+
 * User-facing, output to files
 
     * `make` to render (most interstingly) a text file `output.txt` of
@@ -14,18 +36,6 @@ Usage
 
     * `make tournament; make tournament.png` gets you a nice PNG graph
       of some hands that beat some other hands.
-
-* User-facing, print to standard output (Do `make test` to try out
-  these and the interactive ones.)
-
-    * `python one_time_eval.py as8sqdtc` (equity calculator)
-
-    * `python range.py 15` (plot a preflop range)
-
-    * `python count_hands.py` (convince self there are 1326 hands, 169
-      classes)
-
-    * `python3 fun_with_outs_odds.py` (just math trivia)
 
 * User-facing, interactive
 
@@ -39,17 +49,22 @@ Usage
 
     * best_hole_cards.py (multi-proc, > best_hole_cards > R > txt).
       Big csv. Each proc takes about 1 min on my macbook (2.7ghz i7).
+      Winning cards/hand if all 9 players show down.
 
-    * most_common_hands.py (> hand_ranks > R > pdf)
+    * most_common_hands.py (> hand_ranks > R > pdf). How often do 5
+      random cards make two pair, three of a kind, etc.?
 
     * evolution_of_nut.py (> evolution_of_nut > R > txt)
 
     * theo_actual_nut.py (theo_actual_nut > R > txt)
 
     * pct_vs_time.py (multi-proc, > pct_vs_time > R > pdf). Long
-      compute.
+      compute. How equity can change by street for certain matchups.
 
-    * tournament.py, filt.py 
+    * tournament.py, filt.py. What if you could assign an Elo rating
+      to a pair of hole cards and decide who is conclusively better
+      than whom? What if you showed a directed graph of big
+      favorites/dogs? Would there be any cycles?
 
 * Purely library
 
