@@ -15,7 +15,8 @@ Usage
     * `make tournament; make tournament.png` gets you a nice PNG graph
       of some hands that beat some other hands.
 
-* User-facing, print to standard output
+* User-facing, print to standard output (Do `make test` to try out
+  these and the interactive ones.)
 
     * `python one_time_eval.py as8sqdtc` (equity calculator)
 

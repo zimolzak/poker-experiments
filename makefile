@@ -4,43 +4,43 @@ all : most_common_hands.txt evolution_of_nut.csv theo_actual_nut.csv pct_vs_time
 
 best_hole_cards.csv :
 	echo 'cards,winhand,wl,n,i' > headers.csv
-	python2.7 best_hole_cards.py > temp1.csv &
+	python2.7 x_best_hole_cards.py > temp1.csv &
 	sleep 0.5
-	python2.7 best_hole_cards.py > temp2.csv &
+	python2.7 x_best_hole_cards.py > temp2.csv &
 	sleep 0.5
-	python2.7 best_hole_cards.py > temp3.csv &
+	python2.7 x_best_hole_cards.py > temp3.csv &
 	sleep 0.5
-	python2.7 best_hole_cards.py > temp4.csv
+	python2.7 x_best_hole_cards.py > temp4.csv
 	sleep 2
 	cat headers.csv temp*.csv > best_hole_cards.csv
 	rm -f headers.csv temp*.csv
 
 most_common_hands.txt :
-	python2.7 most_common_hands.py > most_common_hands.txt
+	python2.7 x_most_common_hands.py > most_common_hands.txt
 
 evolution_of_nut.csv :
-	python2.7 evolution_of_nut.py > evolution_of_nut.csv
+	python2.7 x_evolution_of_nut.py > evolution_of_nut.csv
 
 theo_actual_nut.csv :
-	python2.7 theo_actual_nut.py > theo_actual_nut.csv
+	python2.7 x_theo_actual_nut.py > theo_actual_nut.csv
 
 pct_vs_time.csv :
 	echo 'villain,iter,stage,pct' > pct_vs_time.csv
-	python2.7 pct_vs_time.py >> pct_vs_time.csv &
-	python2.7 pct_vs_time.py >> pct_vs_time.csv &
-	python2.7 pct_vs_time.py >> pct_vs_time.csv &
-	python2.7 pct_vs_time.py >> pct_vs_time.csv
+	python2.7 x_pct_vs_time.py >> pct_vs_time.csv &
+	python2.7 x_pct_vs_time.py >> pct_vs_time.csv &
+	python2.7 x_pct_vs_time.py >> pct_vs_time.csv &
+	python2.7 x_pct_vs_time.py >> pct_vs_time.csv
 	sleep 2
 
 tournament :
-	python2.7 tournament.py 1 4 > t14.txt &
-	python2.7 tournament.py 2 4 > t24.txt &
-	python2.7 tournament.py 3 4 > t34.txt &
-	python2.7 tournament.py 4 4 > t44.txt &
+	python2.7 x_tournament.py 1 4 > t14.txt &
+	python2.7 x_tournament.py 2 4 > t24.txt &
+	python2.7 x_tournament.py 3 4 > t34.txt &
+	python2.7 x_tournament.py 4 4 > t44.txt &
 
 tournament.png : t14.txt t24.txt t34.txt t44.txt
 	cat t14.txt t24.txt t34.txt t44.txt > cattd.txt
-	python2.7 filt.py  > filtered.txt
+	python2.7 x_filt.py  > filtered.txt
 	sort filtered.txt | uniq > uniq.txt
 	echo 'digraph {' > tournament.dot
 	cat uniq.txt >> tournament.dot
