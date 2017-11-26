@@ -1,5 +1,5 @@
 from deuces.deuces import Evaluator, Deck, Card
-from convenience import pr, draw_sure
+from pokermodules.convenience import pr, draw_sure
 from itertools import combinations
 from sys import argv
 

@@ -1,8 +1,8 @@
 from sys import argv
 from itertools import product
 from deuces.deuces import Card
-from convenience import pr, find_pcts_multi, reduce_h
-from elo import update_table
+from pokermodules.convenience import pr, find_pcts_multi, reduce_h
+from pokermodules.elo import update_table
 
 r = 'AKQJT98765432'
 

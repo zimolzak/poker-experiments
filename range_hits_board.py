@@ -1,5 +1,5 @@
-from convenience_hole import all_hands_in_range, add_margins, range_plot, deck_choose_2
-from convenience import pr
+from pokermodules.convenience_hole import all_hands_in_range, add_margins, range_plot, deck_choose_2
+from pokermodules.convenience import pr
 from deuces.deuces import Card, Evaluator
 
 e = Evaluator()

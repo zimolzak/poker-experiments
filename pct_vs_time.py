@@ -1,5 +1,5 @@
 from deuces.deuces import Card, Deck
-from convenience import draw_sure, find_pcts
+from pokermodules.convenience import draw_sure, find_pcts
 from random import randint
 
 ### Given some interesting matchups (AA vs {AKs KQs JQs} and AKo vs

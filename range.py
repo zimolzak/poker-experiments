@@ -1,4 +1,4 @@
-from convenience_hole import add_margins, range_plot, top_hands_pct
+from pokermodules.convenience_hole import add_margins, range_plot, top_hands_pct
 from sys import argv
 fc2 = 1326
 p = float(argv[1])

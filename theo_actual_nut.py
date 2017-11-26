@@ -1,6 +1,6 @@
 from itertools import combinations
 from deuces.deuces import Card, Evaluator, Deck
-from nuts import nut_hand
+from pokermodules.nuts import nut_hand
 
 ### What are the theoretical and actual nut hands (on the flop), given
 ### a certain number of players?

@@ -61,6 +61,8 @@ Usage
 
     * convenience_hole.py
 
+    * elo.py
+
 Depends on
 --------
 

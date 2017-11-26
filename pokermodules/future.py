@@ -1,4 +1,4 @@
-from convenience import reduce_h
+from pokermodules.convenience import reduce_h
 
 def pto(pct):
     """Percentage to odds converter. Take a number like 35, return what

@@ -1,5 +1,5 @@
 from deuces.deuces import Card, Deck
-from nuts import nut_hand
+from pokermodules.nuts import nut_hand
 
 ### How does the nut hand evolve over several streets?
 

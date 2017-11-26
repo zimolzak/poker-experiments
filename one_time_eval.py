@@ -7,8 +7,8 @@
 
 import sys
 import time
-from convenience import pr, str2cards, find_pcts_multi
-from convenience_hole import find_pcts_range
+from pokermodules.convenience import pr, str2cards, find_pcts_multi
+from pokermodules.convenience_hole import find_pcts_range
 
 maxiter = 35000
 
